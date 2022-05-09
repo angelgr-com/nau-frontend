@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../components/Button';
+import Paragraph from '../components/Paragraph';
 
 const Profile = () => {
   return (
@@ -9,13 +10,13 @@ const Profile = () => {
       <RegisterSt>
         <HeaderSection>Please, complete your profile to start practicing!</HeaderSection>
         <CountrySt>
-        <p>What country are you from?</p>
+        <Paragraph text='What country are you from?'></Paragraph>
           <CountryNameSt placeholder='Select country' />
           <CountryCodeSt placeholder='Two letters code' />
         </CountrySt>
-        <p>Which is your native language?</p>
+        <Paragraph text='Which is your native language?'></Paragraph>
         <StudentLanguageSt placeholder='Select languge' />
-        <p>Which language do you want to learn?</p>
+        <Paragraph text='Which language do you want to learn?'></Paragraph>
         <StudentLanguageSt placeholder='Select languge' />
         <Button text='Save' />
       </RegisterSt>
@@ -29,6 +30,18 @@ const Profile = () => {
         <HeaderSection>Are you ready to practice?</HeaderSection>
         <Button text='Translate from English to Spanish' />
         <Button text='Translate from Spanish to English' />
+      </RegisterSt>
+
+      <RegisterSt>
+        <HeaderSection>Edit your profile</HeaderSection>
+        <Paragraph text='You can easily update your data.'></Paragraph>
+        <Button text='Edit' />
+      </RegisterSt>
+
+      <RegisterSt>
+        <HeaderSection>Delete your profile</HeaderSection>
+        <Paragraph text='You will loose all your progress but you will be able to re-register at a later time.'></Paragraph>
+        <Button text='Delete' />
       </RegisterSt>
     </>
   )
