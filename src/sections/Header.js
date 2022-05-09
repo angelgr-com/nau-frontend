@@ -9,6 +9,7 @@ const Header = () => {
       <Container>
         <Logos href="/">Naulan</Logos>
         <Navs>
+          <a href="/register">Register</a>
           <Buttons href="/login"><FaUserAlt /></Buttons>
           <Buttons href="/"><GrMenu /></Buttons>
         </Navs>
