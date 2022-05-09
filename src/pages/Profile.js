@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import BubbleSpeech from '../components/BubbleSpeech';
 import Button from '../components/Button';
 import Paragraph from '../components/Paragraph';
 
 const Profile = () => {
   return (
     <>
+      <BubbleSpeech text='Hey {"$first_name"}!' />
       <h1>Profile</h1>
       <RegisterSt>
         <HeaderSection>Please, complete your profile to start practicing!</HeaderSection>
@@ -16,7 +18,7 @@ const Profile = () => {
         </CountrySt>
         <Paragraph text='Which is your native language?'></Paragraph>
         <StudentLanguageSt placeholder='Select languge' />
-        <Paragraph text='Which language do you want to learn?'></Paragraph>
+        <Paragraph text='Which language do you want to practice?'></Paragraph>
         <StudentLanguageSt placeholder='Select languge' />
         <Button text='Save' />
       </RegisterSt>
