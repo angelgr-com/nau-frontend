@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaUserAlt } from "react-icons/fa";
-import { GrMenu } from "react-icons/gr";
+import { FaUserAlt } from 'react-icons/fa';
+import { GrMenu } from 'react-icons/gr';
 
 const Header = () => {
   return (

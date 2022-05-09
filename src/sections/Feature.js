@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import TranslationCard from '../components/TranslationCard';
+import TranslationCard from '../sections/TranslationCard';
 
 const Feature = (props) => {
   return (

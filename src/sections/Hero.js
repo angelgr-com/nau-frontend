@@ -1,18 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import Button from '../components/Button';
+import HeaderSection from '../components/HeaderSection';
+import Paragraph from '../components/Paragraph';
 
 const Hero = () => {
   return (
-    <Heros>
-      <h1>Practice writing skills</h1>
-      <p>Great things are not done by impulse, but by a series of small things brought together.</p>
-      <p>Vincent Van Gogh</p>
-      <button>Start practicing</button>
-    </Heros>
+    <HeroSt>
+      <HeaderSection text='Practice your writing skills' />
+      <Paragraph text='Great things are not done by impulse, but by a series of small things brought together.' />
+      <Paragraph text='Vincent Van Gogh' />
+      <Button text='Start practicing!'></Button>
+    </HeroSt>
   )
 }
 
-const Heros = styled.div`
+const HeroSt = styled.div`
   box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: row;

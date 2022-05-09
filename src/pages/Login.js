@@ -1,15 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import BubbleSpeech from '../components/BubbleSpeech';
+import Button from '../components/Button';
 
 const Login = () => {
   return (
     <LoginSt>
+      <BubbleSpeech text='Hi! Welcome back' />
       <h1>Login to access your profile</h1>
       <p>Don't have an account? <a href='/register'>Sign Up</a></p>
       <InputSt type='email' placeholder='email' />
       <InputSt type='password' placeholder='password' />
       <p><a href='/login'>Forgot password?</a></p>
-      <button>Sign In</button>
+      <Button text='Sign In'></Button>
     </LoginSt>
   )
 }
