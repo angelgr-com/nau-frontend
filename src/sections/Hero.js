@@ -12,22 +12,22 @@ const Hero = () => {
   )
 }
 
-const Heros = styled.header`
+const Heros = styled.div`
+  box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
-  padding: 1rem 5rem;
   margin: 3rem;
-  background-color: var(--gl3);
-  color: var(--white);
+  max-width: 80em;
+  padding: 1rem 5rem;
   position: relative;
   z-index: 500;
-  box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
-  @media only Screen and (max-width: 64em) {
-    padding: 0.5rem 3rem;
-  }
-  @media only Screen and (max-width: 40em) {
+  @media only Screen and (max-width: 48em) {
     padding: 0.5rem 1.5rem;
+    flex-direction: column;
+  }
+  @media only Screen and (max-width: 30em) {
+    padding: 0.5rem 3rem;
   }
 `;
 

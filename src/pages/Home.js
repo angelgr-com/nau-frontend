@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import Feature from '../sections/Feature';
 import Hero from '../sections/Hero';
 
@@ -23,15 +24,17 @@ const Home = () => {
   ];
 
   return (
-    <>
+    <Features>
       <Hero />
       <Feature
         header={feature[0].header}
         paragraph={feature[0].paragraph}
-      />
+        reverse={false}
+        />
       <Feature
         header={feature[1].header}
         paragraph={feature[1].paragraph}
+        reverse={true}
       />
       <Feature
         header={feature[2].header}
@@ -41,8 +44,29 @@ const Home = () => {
         header={feature[3].header}
         paragraph={feature[3].paragraph}
       />
-    </>
+    </Features>
   )
 }
+
+const Features = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  & :nth-child(odd){
+    flex-direction: row-reverse;
+  }
+  & :nth-child(1){
+    flex-direction: column;
+  }
+  @media only Screen and (max-width: 48em) {
+    & :nth-child(odd){
+      flex-direction: column;
+    }
+  }
+  @media only Screen and (max-width: 30em) {
+    padding: 0.5rem 2rem;
+  }
+`;
 
 export default Home;

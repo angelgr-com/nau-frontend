@@ -16,20 +16,55 @@ const TranslationCard = () => {
 }
 
 const TranslationCards = styled.div`
-  height: 16em;
-  width: 20em;
-  margin: 1em;
-  padding: 1em;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1em 2em 1em 1em;
+  min-height: 20em;
+  min-width: 24em;
+  padding: 2em;
   box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
+  @media only Screen and (max-width: 60em) {
+    min-width: 18em;
+  }
+  @media only Screen and (max-width: 48em) {
+    min-width: 20em;
+    margin: 1em 1em 1em 1em;
+  }
+  @media only Screen and (max-width: 30em) {
+    min-width: 14em;
+    margin: 1em 1em 1em 1em;
+  }
 `;
 
 const TextTop = styled.div`
-  background-color: var(--gl3);
-  height: 7em;
+  background-color: var(--bl3);
+  min-height: 10em;
+  width: 20em;
+  @media only Screen and (max-width: 60em) {
+    width: 15em;
+  }
+  @media only Screen and (max-width: 48em) {
+    width: 17em;
+  }
+  @media only Screen and (max-width: 30em) {
+    width: 12em;
+  }
   `;
 const TranslationBottom = styled.div`
   background-color: var(--gl2);
-  height: 7em;
+  min-height: 10em;
+  width: 20em;
+  @media only Screen and (max-width: 60em) {
+    width: 15em;
+  }
+  @media only Screen and (max-width: 48em) {
+    width: 17em;
+  }
+  @media only Screen and (max-width: 30em) {
+    width: 12em;
+  }
 `;
 
 export default TranslationCard;

@@ -47,6 +47,7 @@ export const GlobalStyle = createGlobalStyle`
     outline: 0;
     background: var(--background);
     overflow-x: hidden;
+    min-width: 12em;
   }
   button {
     border: none;
