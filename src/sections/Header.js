@@ -6,18 +6,20 @@ import { GrMenu } from "react-icons/gr";
 const Header = () => {
   return (
     <Headers>
-      <Logos href="/">Naulan</Logos>
-      <Navs>
-        <Buttons href="/"><FaUserAlt /></Buttons>
-        <Buttons href="/"><GrMenu /></Buttons>
-      </Navs>
+      <Container>
+        <Logos href="/">Naulan</Logos>
+        <Navs>
+          <Buttons href="/"><FaUserAlt /></Buttons>
+          <Buttons href="/"><GrMenu /></Buttons>
+        </Navs>
+      </Container>
     </Headers>
   )
 }
 
 const Headers = styled.header`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 1rem 3rem;
   position: sticky;
@@ -33,6 +35,13 @@ const Headers = styled.header`
   @media only Screen and (max-width: 30em) {
     padding: 0.5rem 2rem;
   }
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  max-width: 76em;
 `;
 
 const Navs = styled.nav`

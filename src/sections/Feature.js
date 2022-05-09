@@ -17,8 +17,9 @@ const Feature = (props) => {
 const Features = styled.div`
   box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
   display: flex;
-  flex-direction: row;
+  flex-grow: 1;
   justify-content: space-between;
+  max-width: 76em;
   width: 80%;
   min-width: 24em;
   margin: 2em 0em;
