@@ -9,7 +9,7 @@ const Header = () => {
       <Container>
         <Logos href="/">Naulan</Logos>
         <Navs>
-          <Buttons href="/"><FaUserAlt /></Buttons>
+          <Buttons href="/login"><FaUserAlt /></Buttons>
           <Buttons href="/"><GrMenu /></Buttons>
         </Navs>
       </Container>

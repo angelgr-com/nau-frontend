@@ -19,8 +19,6 @@ const TranslationCards = styled.div`
   align-items: center;
   box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   margin: 1em 2em 1em 1em;
   min-height: 20em;
   min-width: 24em;
