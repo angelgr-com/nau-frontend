@@ -7,10 +7,10 @@ import Paragraph from '../components/Paragraph';
 const Hero = () => {
   return (
     <HeroSt>
-      <HeaderSection text='Practice writing skills' />
+      <HeaderSection text='Practice your writing skills' />
       <Paragraph text='Great things are not done by impulse, but by a series of small things brought together.' />
       <Paragraph text='Vincent Van Gogh' />
-      <Button text='Start practicing'></Button>
+      <Button text='Start practicing!'></Button>
     </HeroSt>
   )
 }
