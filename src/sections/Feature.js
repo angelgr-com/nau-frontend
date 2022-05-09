@@ -27,27 +27,21 @@ const Features = styled.div`
   width: 80%;
   z-index: 500;
   @media only Screen and (max-width: 60em) {
-    /* padding: 0.5rem 1.5rem; */
     align-items: center;
-    background-color: lightblue;
     display: flex;
     flex-direction: row;
     justify-items: center;
     min-width: 18em;
   }
   @media only Screen and (max-width: 48em) {
-    /* padding: 0.5rem 1.5rem; */
     align-items: center;
-    background-color: red;
     display: flex;
     flex-direction: column;
     justify-items: center;
     min-width: 17em;
   }
   @media only Screen and (max-width: 30em) {
-    /* padding: 0.5rem 3rem; */
     align-items: center;
-    background-color: green;
     display: flex;
     flex-direction: column;
     justify-items: center;
