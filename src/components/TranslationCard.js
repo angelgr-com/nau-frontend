@@ -17,6 +17,8 @@ const TranslationCard = () => {
 
 const TranslationCards = styled.div`
   align-items: center;
+  border-radius: 2em;
+  border: 0.2em solid var(--bl2);
   box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
   display: flex;
   margin: 1em 2em 1em 1em;

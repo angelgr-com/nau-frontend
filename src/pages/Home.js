@@ -18,7 +18,7 @@ const Home = () => {
       paragraph: 'A native language expert will review it and give you feedback.',
     },
     {
-      header: 'This is just the beggining...',
+      header: 'This is just the beginning...',
       paragraph: 'We will continue to improve the service and will be happy to hear what you are missing.',
     }
   ];
