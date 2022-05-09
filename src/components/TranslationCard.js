@@ -17,6 +17,7 @@ const TranslationCard = () => {
 
 const TranslationCards = styled.div`
   align-items: center;
+  box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,7 +25,6 @@ const TranslationCards = styled.div`
   min-height: 20em;
   min-width: 24em;
   padding: 2em;
-  box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
   @media only Screen and (max-width: 60em) {
     min-width: 18em;
   }

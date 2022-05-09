@@ -49,9 +49,9 @@ const Home = () => {
 }
 
 const Features = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-items: center;
   & :nth-child(odd){
     flex-direction: row-reverse;

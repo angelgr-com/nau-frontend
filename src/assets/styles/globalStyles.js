@@ -20,10 +20,10 @@ export const GlobalStyle = createGlobalStyle`
     --gl2:#e4e5e9;
   }
   *, *::before, *::after{
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
   }
   *:focus {
     outline: none;
@@ -37,17 +37,17 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Poppins', sans-serif;
   }
   a {
-    text-decoration: none;
     outline: none;
+    text-decoration: none;
   }
   body {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
     background: var(--background);
-    overflow-x: hidden;
+    border: 0;
+    margin: 0;
     min-width: 12em;
+    outline: 0;
+    overflow-x: hidden;
+    padding: 0;
   }
   button {
     border: none;
@@ -66,7 +66,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
   img, svg {
-    width: 100%;
     height: auto;
+    width: 100%;
   }
 `;

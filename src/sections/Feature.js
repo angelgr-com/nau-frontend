@@ -19,38 +19,38 @@ const Features = styled.div`
   display: flex;
   flex-grow: 1;
   justify-content: space-between;
-  max-width: 76em;
-  width: 80%;
-  min-width: 24em;
   margin: 2em 0em;
+  max-width: 76em;
+  min-width: 24em;
   padding: 1rem;
   position: relative;
+  width: 80%;
   z-index: 500;
   @media only Screen and (max-width: 60em) {
     /* padding: 0.5rem 1.5rem; */
-    display: flex;
-    background-color: lightblue;
     align-items: center;
-    justify-items: center;
+    background-color: lightblue;
+    display: flex;
     flex-direction: row;
+    justify-items: center;
     min-width: 18em;
   }
   @media only Screen and (max-width: 48em) {
     /* padding: 0.5rem 1.5rem; */
-    display: flex;
-    background-color: red;
     align-items: center;
-    justify-items: center;
+    background-color: red;
+    display: flex;
     flex-direction: column;
+    justify-items: center;
     min-width: 17em;
   }
   @media only Screen and (max-width: 30em) {
     /* padding: 0.5rem 3rem; */
-    display: flex;
-    background-color: green;
     align-items: center;
-    justify-items: center;
+    background-color: green;
+    display: flex;
     flex-direction: column;
+    justify-items: center;
     min-width: 18em;
   }
 `;

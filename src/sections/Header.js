@@ -18,17 +18,17 @@ const Header = () => {
 }
 
 const Headers = styled.header`
+  align-items: center;
+  box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
+  background-color: var(--bl2);
+  color: var(--white);
   display: flex;
   justify-content: center;
-  align-items: center;
+  opacity: 0.9;
   padding: 1rem 3rem;
   position: sticky;
   top: 0;
-  background-color: var(--bl2);
-  color: var(--white);
-  opacity: 0.9;
   z-index: 1000;
-  box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
   @media only Screen and (max-width: 48em) {
     padding: 1rem 2rem;
   }
@@ -45,9 +45,9 @@ const Container = styled.div`
 `;
 
 const Navs = styled.nav`
+  align-items: flex-end;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
   `;
 
 const Buttons = styled.a`

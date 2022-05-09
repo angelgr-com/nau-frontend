@@ -10,14 +10,13 @@ const Footer = () => {
 }
 
 const Footers = styled.div`
-  display: flex;
   align-items: center;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem 5rem;
-  background-color: var(--gd2);
   color: var(--gl2);
+  background-color: var(--gd2);
+  display: flex;
   height: 6em;
+  justify-content: center;
+  padding: 1rem 5rem;
 `;
 
 export default Footer;
