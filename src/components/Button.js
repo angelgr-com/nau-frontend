@@ -8,14 +8,15 @@ const Button = ({text, link}) => {
 }
 
 const ButtonSt = styled.a`
-  display: flex;
   align-items: center;
-  justify-content: center;
   background-color: orange;
-  height: 2em;
-  width: auto;
   border-radius: 0.5em;
+  cursor: pointer;
+  display: flex;
+  height: 2em;
+  justify-content: center;
   margin-bottom: 1em;
+  width: auto;
 `;
 
 export default Button;
