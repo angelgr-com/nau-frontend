@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { LOGIN } from '../store/types';
 import styled from 'styled-components';
 import BubbleSpeech from '../components/BubbleSpeech';
 
-const Login = () => {
+const Login = (props) => {
   // To redirect user after register
   let navigate = useNavigate();
   
@@ -27,17 +29,20 @@ const Login = () => {
       ...userData,
       [e.target.name]: e.target.value})
   };
+
   const userLogin = async () => {
     setIsLoading(true);
     let body = {
       email: userData.email,
       password: userData.password,
     }
+
     try {
       let result = await axios.post('http://localhost:8000/api/users/login', body);
       // console.log('result: ', result);
       setIsLoading(false);
       setIsLogged(true);
+      props.dispatch({type:LOGIN, payload: result.data});
       setTimeout(()=>{
         navigate('/profile');
       }, 2000);
@@ -140,4 +145,4 @@ const InputSt = styled.input`
   margin-bottom: 1em;
 `;
 
-export default Login;
+export default connect()(Login);
