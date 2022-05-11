@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const RegisterForm = () => {
   // To redirect user after register
   let navigate = useNavigate();
-
+  
   // Hooks
   const [userData, setUserData] = useState({
     first_name: '',
@@ -18,7 +18,11 @@ const RegisterForm = () => {
     password: '',
     password_confirmation: '',
   });
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [isWrong, setIsWrong] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  
   useEffect(()=>{}, []);
   useEffect(()=>{});
 
@@ -69,6 +73,7 @@ const RegisterForm = () => {
   };
 
   const userRegistration = async () => {
+    setIsLoading(true);
     let body = {
       first_name: userData.first_name,
       last_name: userData.last_name,
@@ -77,16 +82,26 @@ const RegisterForm = () => {
       password: userData.password,
       password_confirmation: userData.password_confirmation
     }
-
+    if (body.password !== body.password_confirmation) {
+      setErrorMessage('The password confirmation does not match');
+      setIsWrong(true);
+      return;
+    }
     try {
+      setIsWrong(false);
       let result = await axios.post('http://localhost:8000/api/users', body);
       console.log('result: ', result);
-
+      setIsLoading(false);
+      setIsRegistered(true);
       setTimeout(()=>{
         navigate('/login');
-      }, 1000);
+      }, 2000);
     } catch (error) {
+      setIsLoading(false);
       console.log('axios error: ', error);
+      setErrorMessage(error.response.data.message);
+      setIsWrong(true);
+      console.log('axios errorMessage: ', error.response.data.message);
     }
   }
 
@@ -96,38 +111,36 @@ const RegisterForm = () => {
       <h1>Register to access your profile</h1>
       <p>Already have an account? <a href='/login'>Sign in</a></p>
       <form id="register" method="post" autoComplete="on">
-        <NameSt>
-          <label>First Name: </label>
-          <FirstNameSt
-            autoComplete="given-name"
-            id="first_name"
-            name="first_name"
-            onChange={formik.handleChange}
-            onInput={(e)=>{fillData(e)}}
-            placeholder="First Name"
-            title="first_name"
-            type="text"
-            value={formik.values.first_name}
-          />
-          {formik.errors.first_name ?
-            <div>{formik.errors.first_name}</div> : null
-          }
-          <label>Last Name: </label>
-          <LastNameSt
-            autoComplete="family-name"
-            name="last_name"
-            id="last_name"
-            title="last_name"
-            type="text"
-            placeholder="Last Name"
-            onChange={formik.handleChange}
-            onInput={(e)=>{fillData(e)}}
-            value={formik.values.last_name}
-          />
-          {formik.errors.last_name ?
-            <div>{formik.errors.last_name}</div> : null
-          }
-        </NameSt>
+        <label>First Name: </label>
+        <FirstNameSt
+          autoComplete="given-name"
+          id="first_name"
+          name="first_name"
+          onChange={formik.handleChange}
+          onInput={(e)=>{fillData(e)}}
+          placeholder="First Name"
+          title="first_name"
+          type="text"
+          value={formik.values.first_name}
+        />
+        {formik.errors.first_name ?
+          <Error>{formik.errors.first_name}</Error> : null
+        }
+        <label>Last Name: </label>
+        <LastNameSt
+          autoComplete="family-name"
+          name="last_name"
+          id="last_name"
+          title="last_name"
+          type="text"
+          placeholder="Last Name"
+          onChange={formik.handleChange}
+          onInput={(e)=>{fillData(e)}}
+          value={formik.values.last_name}
+        />
+        {formik.errors.last_name ?
+          <Error>{formik.errors.last_name}</Error> : null
+        }
         <label>Username: </label>
         <InputSt
           autoComplete="username"
@@ -141,7 +154,7 @@ const RegisterForm = () => {
           value={formik.values.username}
         />
         {formik.errors.username ?
-            <div>{formik.errors.username}</div> : null
+            <Error>{formik.errors.username}</Error> : null
         }
         <label>Email: </label>
         <InputSt
@@ -156,7 +169,7 @@ const RegisterForm = () => {
           value={formik.values.email}
         />
         {formik.errors.email ?
-            <div>{formik.errors.email}</div> : null
+            <Error>{formik.errors.email}</Error> : null
         }
         <label>Password: </label>
         <InputSt
@@ -171,7 +184,7 @@ const RegisterForm = () => {
           value={formik.password}
         />
         {formik.errors.password ?
-            <div>{formik.errors.password}</div> : null
+            <Error>{formik.errors.password}</Error> : null
         }
         <label>Confirm password: </label>
         <InputSt
@@ -186,8 +199,11 @@ const RegisterForm = () => {
           value={formik.password_confirmation}
         />
         {formik.errors.password_confirmation ?
-            <div>{formik.password_confirmation}</div> : null
+            <Error>{formik.password_confirmation}</Error> : null
         }
+        {isLoading && <Info>Processing your request...</Info>}
+        {isRegistered && <Info>You are now successfully registered. Please, login.</Info>}
+        {isWrong && <Error>{errorMessage} {isWrong}</Error>}
       <Button type="submit" onClick={() => userRegistration()}>Sign Up</Button>
       </form>
       <p>By clicking this button, you agree to Naulan's <a href='/login'>Terms of Use</a> and <a href='/login'>Privacy Policy</a></p>
@@ -197,7 +213,14 @@ const RegisterForm = () => {
 }
   
 // Styled components
-  
+
+const Error = styled.div`
+  color: red;
+`;
+const Info = styled.div`
+  color: green;
+`;
+
 const Button = styled.a`
   align-items: center;
   background-color: orange;
@@ -235,13 +258,6 @@ const RegisterSt = styled.div`
     max-width: 20em;
     margin-bottom: 4em;
   }
-`;
-
-const NameSt = styled.div`
-display: flex;
-justify-content: space-between;
-flex-direction: row;
-margin-bottom: 1em;
 `;
 
 const FirstNameSt = styled.input`
