@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LOGOUT } from '../store/types';
 import { connect } from 'react-redux';
@@ -11,31 +11,21 @@ const Header = (props) => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    console.log('Redux credentials: ', props.credentials);
+    // console.log('Redux credentials: ', props.credentials);
   });
-
-  const redirect = (route) => {
-    setTimeout(() => {
-      navigate(route);
-    }, 200);
-  }
 
   const logOut = async () => {
     const config = {
       headers: { Authorization: `Bearer ${props.credentials.token}` }
     };
-    // console.log('props.token: ',  props.credentials.token);
-    // console.log('props: ',  props);
+
     // Update logout status in server
     try {
       await axios.post('http://localhost:8000/api/users/logout', config);
   
       // Delete credentials from redux
       props.dispatch({ type: LOGOUT });
-  
-      // setTimeout(() => {
-        navigate("/");
-      // }, 500);
+      navigate("/");
     } catch (error) {
       console.log(error)
     }
