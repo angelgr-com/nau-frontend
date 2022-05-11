@@ -55,7 +55,12 @@ const Header = (props) => {
           <Logos href="/">Naulan</Logos>
           <Navs>
             <button onClick={() => logOut()}>Logout</button>
-            <Buttons href="/profile"><FaUserAlt /></Buttons>
+            <Buttons href="/profile">
+              <Row>
+                <FaUserAlt />
+                <span Style="margin-left: 0.4em">{props.credentials.user.first_name}</span>
+              </Row>
+            </Buttons>
             <Buttons href="/"><GrMenu /></Buttons>
           </Navs>
         </Container>
@@ -63,6 +68,13 @@ const Header = (props) => {
     )
   }
 }
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
 
 const Headers = styled.header`
   align-items: center;
