@@ -1,25 +1,77 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
 import styled from 'styled-components';
 import BubbleSpeech from '../components/BubbleSpeech';
 import Button from '../components/Button';
 import Paragraph from '../components/Paragraph';
 
-const Profile = () => {
+const Profile = (props) => {
+  const [languagesList, setLanguagesList] = useState([]);
+  const [countriesList, setCountriesList] = useState([]);
+
+  useEffect(() => {
+    async function getLanguagesList() {
+      const config = {
+        headers: { Authorization: `Bearer ${props.credentials.token}` }
+      };
+      try {
+        const res = await axios.get('http://localhost:8000/api/texts/languages', config);
+        // console.log(res.data);
+        setLanguagesList(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getLanguagesList();
+  }, [props.credentials.token]);
+
+  useEffect(() => {
+    async function getCountriesList() {
+      const config = {
+        headers: { Authorization: `Bearer ${props.credentials.token}` }
+      };
+      try {
+        const res = await axios.get('http://localhost:8000/api/texts/countries', config);
+        // console.log(res.data);
+        setCountriesList(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getCountriesList();
+  }, [props.credentials.token]);
+
   return (
     <>
-      <BubbleSpeech text='Hey {"$first_name"}!' />
+      <BubbleSpeech text={`Hey ${props.credentials.user.first_name}!`} />
       <h1>Profile</h1>
       <RegisterSt>
         <HeaderSection>Please, complete your profile to start practicing!</HeaderSection>
-        <CountrySt>
         <Paragraph text='What country are you from?'></Paragraph>
-          <CountryNameSt placeholder='Select country' />
-          <CountryCodeSt placeholder='Two letters code' />
-        </CountrySt>
+          <CountryNameSt placeholder='Select country'>
+          {countriesList.map((option, i) => (
+              <option key={i} value={option.value}>{option.label}</option>
+            ))}
+          </CountryNameSt>
         <Paragraph text='Which is your native language?'></Paragraph>
-        <StudentLanguageSt placeholder='Select languge' />
+        <StudentLanguageSt
+          name="nativeLanguage"
+          id="nativeLanguage"
+        >
+          {languagesList.map((option, i) => (
+            <option key={i} value={option.value}>{option.label}</option>
+          ))}
+        </StudentLanguageSt>
         <Paragraph text='Which language do you want to practice?'></Paragraph>
-        <StudentLanguageSt placeholder='Select languge' />
+        <StudentLanguageSt
+          name="studyLanguage"
+          id="studyLanguage"
+        >
+          <option value="Select language" defaultValue disabled>Select language</option>
+          <option value="Spanish">Spanish</option>
+          <option value="English">English</option>
+        </StudentLanguageSt>
         <Button text='Save' />
       </RegisterSt>
 
@@ -76,18 +128,7 @@ const RegisterSt = styled.div`
   }
 `;
 
-const CountrySt = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  margin-bottom: 1em;
-`;
-
-const CountryNameSt = styled.input`
-  width: 45%;
-`;
-
-const CountryCodeSt = styled.input`
+const CountryNameSt = styled.select`
   width: 45%;
 `;
 
@@ -99,4 +140,6 @@ const StudentLanguageSt = styled.select`
   margin-bottom: 1em;
 `;
 
-export default Profile;
+export default connect((state) => ({
+  credentials: state.credentials
+}))(Profile);

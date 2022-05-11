@@ -89,8 +89,8 @@ const RegisterForm = () => {
     }
     try {
       setIsWrong(false);
-      let result = await axios.post('http://localhost:8000/api/users', body);
-      console.log('result: ', result);
+      await axios.post('http://localhost:8000/api/users', body);
+      // console.log('result: ', result);
       setIsLoading(false);
       setIsRegistered(true);
       setTimeout(()=>{
@@ -98,10 +98,10 @@ const RegisterForm = () => {
       }, 2000);
     } catch (error) {
       setIsLoading(false);
-      console.log('axios error: ', error);
+      // console.log('axios error: ', error);
       setErrorMessage(error.response.data.message);
       setIsWrong(true);
-      console.log('axios errorMessage: ', error.response.data.message);
+      // console.log('axios errorMessage: ', error.response.data.message);
     }
   }
 
@@ -126,7 +126,7 @@ const RegisterForm = () => {
         {formik.errors.first_name ?
           <Error>{formik.errors.first_name}</Error> : null
         }
-        <label>Last Name: </label>
+        {/* <label>Last Name: </label>
         <LastNameSt
           autoComplete="family-name"
           name="last_name"
@@ -140,7 +140,7 @@ const RegisterForm = () => {
         />
         {formik.errors.last_name ?
           <Error>{formik.errors.last_name}</Error> : null
-        }
+        } */}
         <label>Username: </label>
         <InputSt
           autoComplete="username"
@@ -264,9 +264,9 @@ const FirstNameSt = styled.input`
 width: 45%;
 `;
 
-const LastNameSt = styled.input`
-width: 45%;
-`; 
+// const LastNameSt = styled.input`
+// width: 45%;
+// `; 
 
 const InputSt = styled.input`
 margin-bottom: 1em;
