@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 
-import credentials from './datosLogin-reducer';
+import credentials from './loginData-reducer';
 
 const rootReducer = combineReducers({
     credentials,
