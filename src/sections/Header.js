@@ -19,9 +19,11 @@ const Header = (props) => {
       headers: { Authorization: `Bearer ${props.credentials.token}` }
     };
 
+    console.log('config', config);
+
     // Update logout status in server
     try {
-      await axios.post('http://localhost:8000/api/users/logout', config);
+      await axios.post('http://localhost:8000/api/users/logout', {}, config);
   
       // Delete credentials from redux
       props.dispatch({ type: LOGOUT });

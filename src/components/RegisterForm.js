@@ -126,7 +126,7 @@ const RegisterForm = () => {
         {formik.errors.first_name ?
           <Error>{formik.errors.first_name}</Error> : null
         }
-        <label>Last Name: </label>
+        {/* <label>Last Name: </label>
         <LastNameSt
           autoComplete="family-name"
           name="last_name"
@@ -140,7 +140,7 @@ const RegisterForm = () => {
         />
         {formik.errors.last_name ?
           <Error>{formik.errors.last_name}</Error> : null
-        }
+        } */}
         <label>Username: </label>
         <InputSt
           autoComplete="username"
@@ -264,9 +264,9 @@ const FirstNameSt = styled.input`
 width: 45%;
 `;
 
-const LastNameSt = styled.input`
-width: 45%;
-`; 
+// const LastNameSt = styled.input`
+// width: 45%;
+// `; 
 
 const InputSt = styled.input`
 margin-bottom: 1em;

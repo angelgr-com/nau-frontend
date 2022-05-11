@@ -17,10 +17,10 @@ const Profile = (props) => {
       };
       try {
         const res = await axios.get('http://localhost:8000/api/texts/languages', config);
-        console.log(res.data);
+        // console.log(res.data);
         setLanguagesList(res.data);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
     getLanguagesList();
@@ -33,10 +33,10 @@ const Profile = (props) => {
       };
       try {
         const res = await axios.get('http://localhost:8000/api/texts/countries', config);
-        console.log(res.data);
+        // console.log(res.data);
         setCountriesList(res.data);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
     getCountriesList();
@@ -44,7 +44,7 @@ const Profile = (props) => {
 
   return (
     <>
-      <BubbleSpeech text={`Hey ${props.credentials.user.first_name} !`} />
+      <BubbleSpeech text={`Hey ${props.credentials.user.first_name}!`} />
       <h1>Profile</h1>
       <RegisterSt>
         <HeaderSection>Please, complete your profile to start practicing!</HeaderSection>
