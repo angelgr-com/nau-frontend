@@ -58,7 +58,7 @@ const Header = (props) => {
             <Buttons href="/profile">
               <Row>
                 <FaUserAlt />
-                <span Style="margin-left: 0.4em">{props.credentials.user.first_name}</span>
+                <UserName>{props.credentials.user.first_name}</UserName>
               </Row>
             </Buttons>
             <Buttons href="/"><GrMenu /></Buttons>
@@ -74,6 +74,10 @@ const Row = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+`;
+
+const UserName = styled.span`
+  margin-left: 0.4em;
 `;
 
 const Headers = styled.header`
