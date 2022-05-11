@@ -1,13 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import axios from 'axios';
 import styled from 'styled-components';
 import BubbleSpeech from '../components/BubbleSpeech';
 import Button from '../components/Button';
 import Paragraph from '../components/Paragraph';
 
-const Profile = () => {
+const Profile = (props) => {
+  const [languagesList, setlanguagesList] = useState([]);
+
+  useEffect(() => {
+    async function getLanguagesList() {
+      const config = {
+        headers: { Authorization: `Bearer ${props.credentials.token}` }
+      };
+      try {
+        const res = await axios.get('http://localhost:8000/api/texts/languages', config);
+        console.log(res.data);
+        setlanguagesList(res.data);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getLanguagesList();
+  }, [props.credentials.token]);
+
   return (
     <>
-      <BubbleSpeech text='Hey {"$first_name"}!' />
+      <BubbleSpeech text={`Hey ${props.credentials.user.first_name} !`} />
       <h1>Profile</h1>
       <RegisterSt>
         <HeaderSection>Please, complete your profile to start practicing!</HeaderSection>
@@ -17,9 +38,23 @@ const Profile = () => {
           <CountryCodeSt placeholder='Two letters code' />
         </CountrySt>
         <Paragraph text='Which is your native language?'></Paragraph>
-        <StudentLanguageSt placeholder='Select languge' />
+        <StudentLanguageSt
+          name="nativeLanguage"
+          id="nativeLanguage"
+        >
+          {languagesList.map((option, i) => (
+            <option key={i} value={option.value}>{option.label}</option>
+          ))}
+        </StudentLanguageSt>
         <Paragraph text='Which language do you want to practice?'></Paragraph>
-        <StudentLanguageSt placeholder='Select languge' />
+        <StudentLanguageSt
+          name="studyLanguage"
+          id="studyLanguage"
+        >
+          <option value="Select language" defaultValue disabled>Select language</option>
+          <option value="Spanish">Spanish</option>
+          <option value="English">English</option>
+        </StudentLanguageSt>
         <Button text='Save' />
       </RegisterSt>
 
@@ -99,4 +134,6 @@ const StudentLanguageSt = styled.select`
   margin-bottom: 1em;
 `;
 
-export default Profile;
+export default connect((state) => ({
+  credentials: state.credentials
+}))(Profile);

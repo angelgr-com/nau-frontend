@@ -28,7 +28,7 @@ const Header = (props) => {
     // console.log('props: ',  props);
     // Update logout status in server
     try {
-      let result = await axios.get('http://localhost:8000/api/users/logout', config);
+      await axios.post('http://localhost:8000/api/users/logout', config);
   
       // Delete credentials from redux
       props.dispatch({ type: LOGOUT });

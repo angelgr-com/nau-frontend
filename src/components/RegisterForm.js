@@ -89,7 +89,7 @@ const RegisterForm = () => {
     }
     try {
       setIsWrong(false);
-      let result = await axios.post('http://localhost:8000/api/users', body);
+      await axios.post('http://localhost:8000/api/users', body);
       // console.log('result: ', result);
       setIsLoading(false);
       setIsRegistered(true);
