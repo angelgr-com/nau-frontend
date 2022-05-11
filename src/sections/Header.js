@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LOGOUT, MOVIES_TITLE } from '../store/types';
+import { LOGOUT } from '../store/types';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -20,13 +20,25 @@ const Header = (props) => {
     }, 200);
   }
 
-  const logOut = () => {
-    // Delete credentials from redux
-    props.dispatch({ type: LOGOUT });
-
-    setTimeout(() => {
-      navigate("/");
-    }, 1000);
+  const logOut = async () => {
+    const config = {
+      headers: { Authorization: `Bearer ${props.credentials.token}` }
+    };
+    // console.log('props.token: ',  props.credentials.token);
+    // console.log('props: ',  props);
+    // Update logout status in server
+    try {
+      let result = await axios.get('http://localhost:8000/api/users/logout', config);
+  
+      // Delete credentials from redux
+      props.dispatch({ type: LOGOUT });
+  
+      // setTimeout(() => {
+        navigate("/");
+      // }, 500);
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   // Render without credentials
@@ -43,14 +55,15 @@ const Header = (props) => {
         </Container>
       </Headers>
     )
+  // Render with credentials 
   } else {
     return (
       <Headers>
         <Container>
           <Logos href="/">Naulan</Logos>
           <Navs>
-            <a href="/logout">Logout</a>
-            <Buttons href="/login"><FaUserAlt /></Buttons>
+            <button onClick={() => logOut()}>Logout</button>
+            <Buttons href="/profile"><FaUserAlt /></Buttons>
             <Buttons href="/"><GrMenu /></Buttons>
           </Navs>
         </Container>
@@ -101,4 +114,6 @@ const Logos = styled.a`
   font-weight: 700;
 `;
 
-export default Header;
+export default connect((state) => ({
+  credentials: state.credentials
+}))(Header);
