@@ -90,7 +90,7 @@ const RegisterForm = () => {
     try {
       setIsWrong(false);
       let result = await axios.post('http://localhost:8000/api/users', body);
-      console.log('result: ', result);
+      // console.log('result: ', result);
       setIsLoading(false);
       setIsRegistered(true);
       setTimeout(()=>{
@@ -98,10 +98,10 @@ const RegisterForm = () => {
       }, 2000);
     } catch (error) {
       setIsLoading(false);
-      console.log('axios error: ', error);
+      // console.log('axios error: ', error);
       setErrorMessage(error.response.data.message);
       setIsWrong(true);
-      console.log('axios errorMessage: ', error.response.data.message);
+      // console.log('axios errorMessage: ', error.response.data.message);
     }
   }
 

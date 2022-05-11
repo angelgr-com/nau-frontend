@@ -35,20 +35,20 @@ const Login = () => {
     }
     try {
       let result = await axios.post('http://localhost:8000/api/users/login', body);
-      console.log('result: ', result);
+      // console.log('result: ', result);
       setIsLoading(false);
       setIsLogged(true);
       setTimeout(()=>{
-        navigate('/');
+        navigate('/profile');
       }, 2000);
     } catch (error) {
       setIsLoading(false);
-      console.log('userData: ', userData);
-      console.log('body: ', body);
-      console.log('axios error: ', error);
+      // console.log('userData: ', userData);
+      // console.log('body: ', body);
+      // console.log('axios error: ', error);
       setErrorMessage(error.response.data.message);
       setIsWrong(true);
-      console.log('axios errorMessage: ', error.response.data.message);
+      // console.log('axios errorMessage: ', error.response.data.message);
     }
   }
 
@@ -57,29 +57,33 @@ const Login = () => {
       <BubbleSpeech text='Hi! Welcome back' />
       <h1>Login to access your profile</h1>
       <p>Don't have an account? <a href='/register'>Sign Up</a></p>
-      <InputSt
-        autoComplete="email"
-        id="email"
-        name="email"
-        placeholder="Email"
-        title="email"
-        type="email"
-        onInput={(e)=>{fillData(e)}}
-      />
-      <InputSt
-        autoComplete="new_password"
-        id="password"
-        name="password"
-        placeholder="Password"
-        title="password"
-        type="password"
-        onInput={(e)=>{fillData(e)}}
-      />
-      <p><a href='/login'>Forgot password?</a></p>
-      {isLoading && <Info>Processing your request...</Info>}
-      {isLogged && <Info>Login successful.</Info>}
-      {isWrong && <Error>{errorMessage} {isWrong}</Error>}
-      <Button onClick={() => userLogin()}>Sign In</Button>
+      <form id="login" method="post" autoComplete="on">
+        <label>Email: </label>
+        <InputSt
+          autoComplete="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+          title="email"
+          type="email"
+          onInput={(e)=>{fillData(e)}}
+        />
+        <label>Password: </label>
+        <InputSt
+          autoComplete="new_password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          title="password"
+          type="password"
+          onInput={(e)=>{fillData(e)}}
+        />
+        <p><a href='/login'>Forgot password?</a></p>
+        {isLoading && <Info>Processing your request...</Info>}
+        {isLogged && <Info>Login successful.</Info>}
+        {isWrong && <Error>{errorMessage} {isWrong}</Error>}
+        <Button onClick={() => userLogin()}>Sign In</Button>
+      </form>
     </LoginSt>
   )
 }
