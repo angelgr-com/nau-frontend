@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { MODIFY_CREDENTIALS } from '../store/types';
 
 const EditProfile = (props) => {
-  // To redirect user after register
   let navigate = useNavigate();
 
   // Hooks

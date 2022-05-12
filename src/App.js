@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import styled from 'styled-components';
 import EditProfile from './pages/EditProfile';
+import DeleteProfile from './pages/DeleteProfile';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/edit" element={<EditProfile />} />
+            <Route path="/profile/delete" element={<DeleteProfile />} />
           </Routes>
         </Container>
         <Footer />

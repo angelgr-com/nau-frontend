@@ -1,0 +1,104 @@
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import styled from 'styled-components';
+import Paragraph from '../components/Paragraph';
+
+const DeleteProfile = (props) => {
+  let navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isEdited, setIsEdited] = useState(false);
+  const [isWrong, setIsWrong] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const deleteProfile = async () => {
+    setIsLoading(true);
+    setIsWrong(false);
+
+    const config = {
+      headers: { Authorization: `Bearer ${props.credentials.token}` }
+    };
+
+    try {
+      let res = await axios.delete('http://localhost:8000/api/users/', config);
+
+      console.log('result: ', res);
+      setIsLoading(false);
+      setIsEdited(true);
+      setTimeout(()=>{
+        navigate('/');
+      }, 2000);
+    } catch (error) {
+      setIsLoading(false);
+      setErrorMessage(error.response.data.message);
+      setIsWrong(true);
+    }
+  }
+
+
+  return (
+    <DeleteProfileSt>
+      <h1>Delete your profile</h1>
+      <Paragraph text="Please, confirm that you wish to delete your profile."/>
+      <Paragraph text="You will lose all your progress and your account will be deleted immediately."/>
+      <Paragraph text="This action cannot be undone."/>
+      {isLoading && <Info>Processing your request...</Info>}
+      {isEdited && <Info>Account deleted successfully.</Info>}
+      {isWrong && <Error>{errorMessage} {isWrong}</Error>}
+      <Button onClick={() => deleteProfile()}>Confirm profile deletion</Button>
+    </DeleteProfileSt>
+  );
+}
+
+const Error = styled.div`
+  color: red;
+`;
+
+const Info = styled.div`
+  color: green;
+`;
+
+const Button = styled.a`
+  align-items: center;
+  background-color: orange;
+  border-radius: 0.5em;
+  cursor: pointer;
+  display: flex;
+  height: 2em;
+  justify-content: center;
+  margin-bottom: 1em;
+  width: auto;
+`;
+
+const DeleteProfileSt = styled.div`
+  box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1em 2em 1em 1em;
+  max-width: 76em;
+  min-height: 20em;
+  min-width: 76em;
+  padding: 2em;
+  @media only Screen and (max-width: 60em) {
+    min-width: 45em;
+    max-width: 45em;
+    margin-bottom: 40em;
+  }
+  @media only Screen and (max-width: 48em) {
+    min-width: 40em;
+    max-width: 40em;
+    margin-bottom: 25em;
+  }
+  @media only Screen and (max-width: 30em) {
+    min-width: 20em;
+    max-width: 20em;
+    margin-bottom: 4em;
+  }
+`;
+
+export default connect((state) => ({
+  credentials: state.credentials
+}))(DeleteProfile);

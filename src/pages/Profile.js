@@ -104,7 +104,7 @@ const Profile = (props) => {
       <RegisterSt>
         <HeaderSection>Delete your profile</HeaderSection>
         <Paragraph text='You will loose all your progress but you will be able to re-register at a later time.'></Paragraph>
-        <Button>Delete</Button>
+        <Button onClick={() => navigate('/profile/delete')}>Delete</Button>
       </RegisterSt>
     </>
   )
