@@ -9,6 +9,8 @@ import Profile from './pages/Profile';
 import styled from 'styled-components';
 import EditProfile from './pages/EditProfile';
 import DeleteProfile from './pages/DeleteProfile';
+import TranslateEnEs from './features/TranslateEnEs';
+import TranslateEsEn from './features/TranslateEsEn';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/edit" element={<EditProfile />} />
             <Route path="/profile/delete" element={<DeleteProfile />} />
+            <Route path="/practice/en-es" element={<TranslateEnEs />} />
+            <Route path="/practice/es-en" element={<TranslateEsEn />} />
           </Routes>
         </Container>
         <Footer />

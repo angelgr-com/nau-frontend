@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Author = ({name}) => {
+const Author = ({author}) => {
   return (
-    <AuthorSt>{name}</AuthorSt>
+    <AuthorSt>{author}</AuthorSt>
   )
 };
 

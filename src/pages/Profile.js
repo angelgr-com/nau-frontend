@@ -91,8 +91,8 @@ const Profile = (props) => {
 
       <RegisterSt>
         <HeaderSection>Are you ready to practice?</HeaderSection>
-        <Button>Translate from English to Spanish</Button>
-        <Button>Translate from Spanish to English</Button>
+        <Button onClick={() => navigate('/practice/en-es')}>Translate from English to Spanish</Button>
+        <Button onClick={() => navigate('/practice/es-en')}>Translate from Spanish to English</Button>
       </RegisterSt>
 
       <RegisterSt>
