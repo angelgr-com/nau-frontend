@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import { LOGOUT } from '../store/types';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -12,6 +13,25 @@ const DeleteProfile = (props) => {
   const [isEdited, setIsEdited] = useState(false);
   const [isWrong, setIsWrong] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const logOut = async () => {
+    const config = {
+      headers: { Authorization: `Bearer ${props.credentials.token}` }
+    };
+
+    console.log('config', config);
+
+    // Update logout status in server
+    try {
+      await axios.post('http://localhost:8000/api/users/logout', {}, config);
+  
+      // Delete credentials from redux
+      props.dispatch({ type: LOGOUT });
+      navigate("/");
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const deleteProfile = async () => {
     setIsLoading(true);
@@ -27,9 +47,10 @@ const DeleteProfile = (props) => {
       console.log('result: ', res);
       setIsLoading(false);
       setIsEdited(true);
+      logOut();
       setTimeout(()=>{
         navigate('/');
-      }, 2000);
+      }, 4000);
     } catch (error) {
       setIsLoading(false);
       setErrorMessage(error.response.data.message);

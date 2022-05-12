@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { LOGIN } from '../store/types';
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components';
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
   // To redirect user after register
   let navigate = useNavigate();
   
@@ -89,16 +91,17 @@ const RegisterForm = () => {
     }
     try {
       setIsWrong(false);
-      await axios.post('http://localhost:8000/api/users', body);
-      // console.log('result: ', result);
+      const res = await axios.post('http://localhost:8000/api/users', body);
+      console.log('res: ', res);
       setIsLoading(false);
       setIsRegistered(true);
+      props.dispatch({type:LOGIN, payload: res.data});
       setTimeout(()=>{
-        navigate('/login');
+        navigate('/profile');
       }, 2000);
     } catch (error) {
       setIsLoading(false);
-      // console.log('axios error: ', error);
+      console.log('axios error: ', error);
       setErrorMessage(error.response.data.message);
       setIsWrong(true);
       // console.log('axios errorMessage: ', error.response.data.message);
@@ -272,4 +275,4 @@ const InputSt = styled.input`
 margin-bottom: 1em;
 `;
 
-export default RegisterForm;
+export default connect()(RegisterForm);
