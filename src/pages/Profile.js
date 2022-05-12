@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import styled from 'styled-components';
 import BubbleSpeech from '../components/BubbleSpeech';
-import Button from '../components/Button';
 import Paragraph from '../components/Paragraph';
 
 const Profile = (props) => {
+  let navigate = useNavigate();
+
   const [languagesList, setLanguagesList] = useState([]);
   const [countriesList, setCountriesList] = useState([]);
+  // const [isProfileEdited, setIsProfileEdited] = useState(false);
 
   useEffect(() => {
     async function getLanguagesList() {
@@ -42,18 +45,24 @@ const Profile = (props) => {
     getCountriesList();
   }, [props.credentials.token]);
 
+  // const showEditProfile = () => {
+  //   setIsProfileEdited(true);
+  // }
+
   return (
     <>
       <BubbleSpeech text={`Hey ${props.credentials.user.first_name}!`} />
       <h1>Profile</h1>
       <RegisterSt>
-        <HeaderSection>Please, complete your profile to start practicing!</HeaderSection>
+        <HeaderSection>
+          Please, complete your profile to start practicing!
+        </HeaderSection>
         <Paragraph text='What country are you from?'></Paragraph>
-          <CountryNameSt placeholder='Select country'>
-          {countriesList.map((option, i) => (
-              <option key={i} value={option.value}>{option.label}</option>
-            ))}
-          </CountryNameSt>
+        <CountryNameSt placeholder='Select country'>
+        {countriesList.map((option, i) => (
+            <option key={i} value={option.value}>{option.label}</option>
+          ))}
+        </CountryNameSt>
         <Paragraph text='Which is your native language?'></Paragraph>
         <StudentLanguageSt
           name="nativeLanguage"
@@ -72,34 +81,46 @@ const Profile = (props) => {
           <option value="Spanish">Spanish</option>
           <option value="English">English</option>
         </StudentLanguageSt>
-        <Button text='Save' />
+        <Button>Save</Button>
       </RegisterSt>
 
       <RegisterSt>
         <HeaderSection>Test your skill level (CEFR)</HeaderSection>
-        <Button text='Test your skill level' />
+        <Button>Test your skill level</Button>
       </RegisterSt>
 
       <RegisterSt>
         <HeaderSection>Are you ready to practice?</HeaderSection>
-        <Button text='Translate from English to Spanish' />
-        <Button text='Translate from Spanish to English' />
+        <Button>Translate from English to Spanish</Button>
+        <Button>Translate from Spanish to English</Button>
       </RegisterSt>
 
       <RegisterSt>
         <HeaderSection>Edit your profile</HeaderSection>
         <Paragraph text='You can easily update your data.'></Paragraph>
-        <Button text='Edit' />
+        <Button onClick={() => navigate('/profile/edit')}>Edit</Button>
       </RegisterSt>
 
       <RegisterSt>
         <HeaderSection>Delete your profile</HeaderSection>
         <Paragraph text='You will loose all your progress but you will be able to re-register at a later time.'></Paragraph>
-        <Button text='Delete' />
+        <Button>Delete</Button>
       </RegisterSt>
     </>
   )
 }
+
+const Button = styled.a`
+  align-items: center;
+  background-color: orange;
+  border-radius: 0.5em;
+  cursor: pointer;
+  display: flex;
+  height: 2em;
+  justify-content: center;
+  margin-bottom: 1em;
+  width: auto;
+`;
 
 const RegisterSt = styled.div`
   box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);

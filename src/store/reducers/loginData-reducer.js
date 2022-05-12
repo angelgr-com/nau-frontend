@@ -16,7 +16,7 @@ const loginDataReducer = (state = initialState, action) => {
             return initialState;
         
         case MODIFY_CREDENTIALS :
-            return {...state, usuario: action.payload};
+            return {...state, user: action.payload};
 
         default :
             return state
