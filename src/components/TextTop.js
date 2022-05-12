@@ -6,18 +6,18 @@ import Text from '../components/Text';
 const TextTop = (props) => {
   return (
     <TextTopSt>
-        <Text text='Great things are not done by impulse, but by a series of small things brought together.' />
-        <Author author='Vincent Van Gogh' />
+        <Text text={props.text} />
+        <Author author={props.author} />
     </TextTopSt>
   )
 }
 
 const TextTopSt = styled.div`
-  display: flex;
   background-color: #fff;
   border: 0.1em solid rgb(255, 165, 0, 0.5);
   border-radius: 1em;
   border-bottom: none;
+  display: flex;
   flex-grow: 1;
   justify-content: space-between;
   min-height: 10em;

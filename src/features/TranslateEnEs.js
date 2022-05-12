@@ -1,10 +1,23 @@
 import React from 'react';
+import styled from 'styled-components';
 import TranslationCard from '../sections/TranslationCard';
+import TranslationCheck from '../sections/TranslationCheck';
 
-const Translate = () => {
+const TranslateEnEs = (props) => {
   return (
-    <TranslationCard />
+    <TranslateEnEsSt>
+      <TranslationCard
+        text='Great things are not done by impulse, but by a series of small things brought together.'
+        author='Vincent Van Gogh'
+      />
+      <TranslationCheck />
+    </TranslateEnEsSt>
   );
 }
 
-export default Translate;
+const TranslateEnEsSt = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export default TranslateEnEs;

@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const Text = ({text}) => {
+const Text = (props) => {
   return (
-    <TextSt>{text}</TextSt>
+    <TextSt>{props.text}</TextSt>
   )
 }
 
@@ -12,6 +12,7 @@ const TextSt = styled.div`
   border: 0.1em dotted var(--gd2);
   font-style: italic;
   padding: 0.4em;
+  text-align: center;
   margin: 1em;
 `;
 
