@@ -6,6 +6,7 @@ const Footer = () => {
 
   return (
     <Footers>
+      <p>Inspirational quotes provided by <a href="https://zenquotes.io/" target="_blank">ZenQuotes API</a></p>
       <p>
         © {now.getFullYear()} Naulan
       </p>

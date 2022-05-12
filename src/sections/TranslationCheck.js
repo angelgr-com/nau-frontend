@@ -1,21 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import TextTop from '../components/TextTop';
-import TranslationBottom from '../components/TranslationBottom';
+import TranslationCheckBottom from '../components/TranslationCheckBottom';
 
-const TranslationCard = (props) => {
+const TranslationCheck = (props) => {
   return (
-    <TranslationCardSt>
+    <TranslationCheckSt>
       <TextTop
-        text={props.text}
-        author={props.author}
+        text='Las grandes cosas no se hacen por impulso, sino por una serie de pequeñas cosas reunidas.'
+        author='Vincent Van Gogh'
       />
-      <TranslationBottom />
-    </TranslationCardSt>
+      <TranslationCheckBottom />
+    </TranslationCheckSt>
   )
 }
 
-const TranslationCardSt = styled.div`
+const TranslationCheckSt = styled.div`
   align-items: center;
   border-radius: 2em;
   border: 0.15em solid var(--gl1);
@@ -40,4 +40,4 @@ const TranslationCardSt = styled.div`
   }
 `;
 
-export default TranslationCard;
+export default TranslationCheck;
