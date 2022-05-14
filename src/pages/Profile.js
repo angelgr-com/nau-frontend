@@ -9,9 +9,16 @@ import Paragraph from '../components/Paragraph';
 const Profile = (props) => {
   let navigate = useNavigate();
 
+  // Hooks
   const [languagesList, setLanguagesList] = useState([]);
   const [countriesList, setCountriesList] = useState([]);
-  // const [isProfileEdited, setIsProfileEdited] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isProfileComplete, setIsProfileComplete] = useState(false);
+  const [isWrong, setIsWrong] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [country, setCountry] = useState('');
+  const [nativeLanguage, setNativeLanguage] = useState('');
+  const [studyingLanguage, setstudyingLanguage] = useState('');
 
   useEffect(() => {
     async function getLanguagesList() {
@@ -45,6 +52,40 @@ const Profile = (props) => {
     getCountriesList();
   }, [props.credentials.token]);
 
+  const completeProfile = async () => {
+    setIsLoading(true);
+    setIsProfileComplete(false);
+    setIsWrong(false);
+    setErrorMessage('');
+    let body = {
+      country: country,
+      native_language: nativeLanguage,
+      studying_language: studyingLanguage
+    }
+    const config = {
+      headers: { Authorization: `Bearer ${props.credentials.token}` }
+    };
+    try {
+      setIsWrong(false);
+      const res = await axios.post('http://localhost:8000/api/users/profile/add-data', body, config);
+      console.log('res: ', res);
+      setIsLoading(false);
+      setIsProfileComplete(true);
+      console.log('country: ', country);
+      console.log('nativeLanguage: ', nativeLanguage);
+      console.log('studyingLanguage: ', studyingLanguage);
+      console.log('isLoading: ', isLoading);
+      console.log('isProfileComplete: ', isProfileComplete);
+      console.log('isWrong: ', isWrong);
+      console.log('body: ', body);
+    } catch (error) {
+      setIsWrong(true);
+      setIsLoading(false);
+      console.log('axios error: ', error);
+      setErrorMessage(error.response.data.message);
+    }
+  }
+
   // const showEditProfile = () => {
   //   setIsProfileEdited(true);
   // }
@@ -58,7 +99,12 @@ const Profile = (props) => {
           Please, complete your profile to start practicing!
         </HeaderSection>
         <Paragraph text='What country are you from?'></Paragraph>
-        <CountryNameSt placeholder='Select country'>
+        <CountryNameSt
+          name="country"
+          id="country"
+          placeholder='Select country'
+          default='Spain'
+          onChange={(e)=>{setCountry(e.target.value)}}>
         {countriesList.map((option, i) => (
             <option key={i} value={option.value}>{option.label}</option>
           ))}
@@ -67,6 +113,7 @@ const Profile = (props) => {
         <StudentLanguageSt
           name="nativeLanguage"
           id="nativeLanguage"
+          onChange={(e)=>{setNativeLanguage(e.target.value)}}
         >
           {languagesList.map((option, i) => (
             <option key={i} value={option.value}>{option.label}</option>
@@ -76,12 +123,16 @@ const Profile = (props) => {
         <StudentLanguageSt
           name="studyLanguage"
           id="studyLanguage"
+          onChange={(e)=>{setstudyingLanguage(e.target.value)}}
         >
           <option value="Select language" defaultValue disabled>Select language</option>
           <option value="Spanish">Spanish</option>
           <option value="English">English</option>
         </StudentLanguageSt>
-        <Button>Save</Button>
+        {isLoading && <Info>Processing your request...</Info>}
+        {isProfileComplete && <Info>Your profile is successfully complete.</Info>}
+        {isWrong && <Error>{errorMessage} {isWrong}</Error>}
+        <Button type="submit" onClick={() => completeProfile()}>Save</Button>
       </RegisterSt>
 
       <RegisterSt>
@@ -109,6 +160,16 @@ const Profile = (props) => {
     </>
   )
 }
+
+// Styled components
+
+const Info = styled.div`
+  color: green;
+`;
+
+const Error = styled.div`
+  color: red;
+`;
 
 const Button = styled.a`
   align-items: center;

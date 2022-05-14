@@ -6,6 +6,8 @@ import { LOGIN } from '../store/types';
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components';
+import Info from '../components/Info';
+import Error from '../components/Error';
 
 const RegisterForm = (props) => {
   // To redirect user after register
@@ -67,7 +69,7 @@ const RegisterForm = (props) => {
     },
   });
 
-  // Handler
+  // Handlers
   const fillData = (e) => {
     setUserData({
       ...userData,
@@ -216,13 +218,6 @@ const RegisterForm = (props) => {
 }
   
 // Styled components
-
-const Error = styled.div`
-  color: red;
-`;
-const Info = styled.div`
-  color: green;
-`;
 
 const Button = styled.a`
   align-items: center;
