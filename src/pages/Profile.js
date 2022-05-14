@@ -43,7 +43,7 @@ const Profile = (props) => {
 
       <RegisterSt>
         <HeaderSection>Test your skill level (CEFR)</HeaderSection>
-        <Button>Test your skill level</Button>
+        <Button onClick={() => navigate('/practice/en-es')}>Test your skill level</Button>
       </RegisterSt>
 
       <RegisterSt>
