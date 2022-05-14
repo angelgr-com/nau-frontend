@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import styled from 'styled-components';
 import { MODIFY_CREDENTIALS } from '../store/types';
+import CompleteProfile from '../sections/CompleteProfile';
 
 const EditProfile = (props) => {
   let navigate = useNavigate();
@@ -63,43 +64,55 @@ const EditProfile = (props) => {
 
   
   return (
-    <EditProfileSt>
+    <>
       <h1>Edit your profile</h1>
-      <form id="edit-profile" method="post" autoComplete="off">
-        <label>First Name: </label>
-        <InputSt
-          id="first-name"
-          name="first-name"
-          defaultValue={props.credentials.user.first_name}
-          title="first-name"
-          type="text"
-          onChange={firstNameChange}
-          contenteditable
-        />
-        <label>Username: </label>
-        <InputSt
-          id="first-name"
-          name="first-name"
-          defaultValue={props.credentials.user.username}
-          title="first-name"
-          type="text"
-          onChange={usernameChange}
-        />
-        <label>Email: </label>
-        <InputSt
-          id="email"
-          name="email"
-          defaultValue={props.credentials.user.email}
-          title="email"
-          type="text"
-          onChange={emailChange}
-        />
-        {isLoading && <Info>Processing your request...</Info>}
-        {isEdited && <Info>Edit successful.</Info>}
-        {isWrong && <Error>{errorMessage} {isWrong}</Error>}
-        <Button onClick={() => sendEditedProfile()}>Save changes</Button>
-      </form>
-    </EditProfileSt>
+
+      <EditProfileSt>
+        <h2>Change your personal data</h2>
+        <form id="edit-profile" method="post" autoComplete="off">
+          <div>
+            <label>First Name: </label>
+            <InputSt
+              id="first-name"
+              name="first-name"
+              defaultValue={props.credentials.user.first_name}
+              title="first-name"
+              type="text"
+              onChange={firstNameChange}
+              contenteditable
+            />
+          </div>
+          <div>
+            <label>Username: </label>
+            <InputSt
+              id="first-name"
+              name="first-name"
+              defaultValue={props.credentials.user.username}
+              title="first-name"
+              type="text"
+              onChange={usernameChange}
+            />
+          </div>
+          <div>
+            <label>Email: </label>
+            <InputSt
+              id="email"
+              name="email"
+              defaultValue={props.credentials.user.email}
+              title="email"
+              type="text"
+              onChange={emailChange}
+            />
+          </div>
+          {isLoading && <Info>Processing your request...</Info>}
+          {isEdited && <Info>Edit successful.</Info>}
+          {isWrong && <Error>{errorMessage} {isWrong}</Error>}
+          <Button onClick={() => sendEditedProfile()}>Save changes</Button>
+        </form>
+      </EditProfileSt>
+
+      <CompleteProfile headerText='Change your learning profile' />
+    </>
   );
 }
 
