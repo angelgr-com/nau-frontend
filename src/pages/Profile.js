@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import styled from 'styled-components';
 import BubbleSpeech from '../components/BubbleSpeech';
 import Paragraph from '../components/Paragraph';
@@ -8,6 +9,27 @@ import CompleteProfile from '../sections/CompleteProfile';
 
 const Profile = (props) => {
   let navigate = useNavigate();
+  const [IsProfileComplete, setIsProfileComplete] = useState(false);
+
+  const checkIsProfileComplete = async () => {
+    const config = {
+      headers: { Authorization: `Bearer ${props.credentials.token}` }
+    };
+
+    try {
+      let res = await axios.get('http://localhost:8000/api/users/profile/complete', config);
+      if(res.data.message === 'User is complete') {
+        setIsProfileComplete(true);
+      } else {
+        setIsProfileComplete(false);
+      }
+      console.log('result: ', res);
+    } catch (error) {
+      console.log('error: ', error.response.data.message);
+    }
+  }
+
+  checkIsProfileComplete();
 
   return (
     <>
@@ -15,7 +37,7 @@ const Profile = (props) => {
       
       <h1>Profile</h1>
 
-      <CompleteProfile headerText='Please, complete your profile to start practicing!' />
+      {IsProfileComplete && <CompleteProfile headerText='Please, complete your profile to start practicing!' />}
 
       <RegisterSt>
         <HeaderSection>Test your skill level (CEFR)</HeaderSection>
