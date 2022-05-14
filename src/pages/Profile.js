@@ -19,13 +19,13 @@ const Profile = (props) => {
   
       try {
         let res = await axios.get('http://localhost:8000/api/users/profile/complete', config);
-        console.log('res.data.message: ', res.data.message);
+        // console.log('res.data.message: ', res.data.message);
         if(res.data.message === 'User is complete') {
           setIsProfileIncomplete(false);
         } else {
           setIsProfileIncomplete(true);
         }
-        console.log('result: ', res);
+        // console.log('result: ', res);
       } catch (error) {
         console.log('error: ', error.response.data.message);
       }
