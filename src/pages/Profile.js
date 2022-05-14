@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -9,27 +9,29 @@ import CompleteProfile from '../sections/CompleteProfile';
 
 const Profile = (props) => {
   let navigate = useNavigate();
-  const [IsProfileComplete, setIsProfileComplete] = useState(false);
+  const [IsProfileIncomplete, setIsProfileIncomplete] = useState(false);
 
-  const checkIsProfileComplete = async () => {
-    const config = {
-      headers: { Authorization: `Bearer ${props.credentials.token}` }
-    };
-
-    try {
-      let res = await axios.get('http://localhost:8000/api/users/profile/complete', config);
-      if(res.data.message === 'User is complete') {
-        setIsProfileComplete(true);
-      } else {
-        setIsProfileComplete(false);
+  useEffect(()=>{
+    async function checkIsProfileComplete() {
+      const config = {
+        headers: { Authorization: `Bearer ${props.credentials.token}` }
+      };
+  
+      try {
+        let res = await axios.get('http://localhost:8000/api/users/profile/complete', config);
+        console.log('res.data.message: ', res.data.message);
+        if(res.data.message === 'User is complete') {
+          setIsProfileIncomplete(false);
+        } else {
+          setIsProfileIncomplete(true);
+        }
+        console.log('result: ', res);
+      } catch (error) {
+        console.log('error: ', error.response.data.message);
       }
-      console.log('result: ', res);
-    } catch (error) {
-      console.log('error: ', error.response.data.message);
     }
-  }
-
-  checkIsProfileComplete();
+    checkIsProfileComplete();
+  }, [props.credentials.token]);
 
   return (
     <>
@@ -37,7 +39,7 @@ const Profile = (props) => {
       
       <h1>Profile</h1>
 
-      {IsProfileComplete && <CompleteProfile headerText='Please, complete your profile to start practicing!' />}
+      {IsProfileIncomplete && <CompleteProfile headerText='Please, complete your profile to start practicing!' />}
 
       <RegisterSt>
         <HeaderSection>Test your skill level (CEFR)</HeaderSection>
