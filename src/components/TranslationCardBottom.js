@@ -32,7 +32,7 @@ const TranslationBottom = (props) => {
     try {
       setIsLoading(true);
       let res = await axios.post(
-        'http://localhost:8000/api/texts/translation',
+        'https://quiet-shelf-00426.herokuapp.com/api/texts/translation',
         body,
         config
       );

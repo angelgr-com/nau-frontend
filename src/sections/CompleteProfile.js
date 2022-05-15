@@ -23,7 +23,7 @@ const CompleteProfile = (props) => {
         headers: { Authorization: `Bearer ${props.credentials.token}` }
       };
       try {
-        const res = await axios.get('http://localhost:8000/api/texts/languages', config);
+        const res = await axios.get('https://quiet-shelf-00426.herokuapp.com/api/texts/languages', config);
         setLanguagesList(res.data);
       } catch (error) {
         console.log(error);
@@ -38,7 +38,7 @@ const CompleteProfile = (props) => {
         headers: { Authorization: `Bearer ${props.credentials.token}` }
       };
       try {
-        const res = await axios.get('http://localhost:8000/api/texts/countries', config);
+        const res = await axios.get('https://quiet-shelf-00426.herokuapp.com/api/texts/countries', config);
         setCountriesList(res.data);
       } catch (error) {
         console.log(error);
@@ -62,7 +62,7 @@ const CompleteProfile = (props) => {
     };
     try {
       setIsWrong(false);
-      const res = await axios.post('http://localhost:8000/api/users/profile/add-data', body, config);
+      const res = await axios.post('https://quiet-shelf-00426.herokuapp.com/api/users/profile/add-data', body, config);
       setIsLoading(false);
       setIsProfileComplete(true);
     } catch (error) {

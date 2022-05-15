@@ -41,7 +41,7 @@ const EditProfile = (props) => {
     };
 
     try {
-      let res = await axios.put('http://localhost:8000/api/users/profile', body, config);
+      let res = await axios.put('https://quiet-shelf-00426.herokuapp.com/api/users/profile', body, config);
       if(res) {
         props.dispatch({type: MODIFY_CREDENTIALS, payload: body});
       }

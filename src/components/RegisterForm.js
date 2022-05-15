@@ -93,7 +93,7 @@ const RegisterForm = (props) => {
     }
     try {
       setIsWrong(false);
-      const res = await axios.post('http://localhost:8000/api/users', body);
+      const res = await axios.post('https://quiet-shelf-00426.herokuapp.com/api/users', body);
       setIsLoading(false);
       setIsRegistered(true);
       props.dispatch({type:LOGIN, payload: res.data});
@@ -113,18 +113,20 @@ const RegisterForm = (props) => {
       <h1>Register to access your profile</h1>
       <p>Already have an account? <a href='/login'>Sign in</a></p>
       <form id="register" method="post" autoComplete="on">
-        <label>First Name: </label>
-        <FirstNameSt
-          autoComplete="given-name"
-          id="first_name"
-          name="first_name"
-          onChange={formik.handleChange}
-          onInput={(e)=>{fillData(e)}}
-          placeholder="First Name"
-          title="first_name"
-          type="text"
-          value={formik.values.first_name}
-        />
+        <div>
+          <label>First Name: </label>
+          <FirstNameSt
+            autoComplete="given-name"
+            id="first_name"
+            name="first_name"
+            onChange={formik.handleChange}
+            onInput={(e)=>{fillData(e)}}
+            placeholder="First Name"
+            title="first_name"
+            type="text"
+            value={formik.values.first_name}
+          />
+        </div>
         {formik.errors.first_name ?
           <Error>{formik.errors.first_name}</Error> : null
         }
@@ -143,63 +145,71 @@ const RegisterForm = (props) => {
         {formik.errors.last_name ?
           <Error>{formik.errors.last_name}</Error> : null
         } */}
-        <label>Username: </label>
-        <InputSt
-          autoComplete="username"
-          id="username"
-          name="username"
-          onChange={formik.handleChange}
-          onInput={(e)=>{fillData(e)}}
-          placeholder='Choose your username'
-          title="username"
-          type="text"
-          value={formik.values.username}
-        />
+        <div>
+          <label>Username: </label>
+          <InputSt
+            autoComplete="username"
+            id="username"
+            name="username"
+            onChange={formik.handleChange}
+            onInput={(e)=>{fillData(e)}}
+            placeholder='Choose your username'
+            title="username"
+            type="text"
+            value={formik.values.username}
+          />
+        </div>
         {formik.errors.username ?
             <Error>{formik.errors.username}</Error> : null
         }
-        <label>Email: </label>
-        <InputSt
-          autoComplete="email"
-          id="email"
-          name="email"
-          onChange={formik.handleChange}
-          onInput={(e)=>{fillData(e)}}
-          placeholder="Email"
-          title="email"
-          type="email"
-          value={formik.values.email}
-        />
+        <div>
+          <label>Email: </label>
+          <InputSt
+            autoComplete="email"
+            id="email"
+            name="email"
+            onChange={formik.handleChange}
+            onInput={(e)=>{fillData(e)}}
+            placeholder="Email"
+            title="email"
+            type="email"
+            value={formik.values.email}
+          />
+        </div>
         {formik.errors.email ?
             <Error>{formik.errors.email}</Error> : null
         }
-        <label>Password: </label>
-        <InputSt
-          autoComplete="new_password"
-          id="password"
-          name="password"
-          onChange={formik.handleChange}
-          onInput={(e)=>{fillData(e)}}
-          placeholder="Password"
-          title="password"
-          type="password"
-          value={formik.password}
-        />
+        <div>
+          <label>Password: </label>
+          <InputSt
+            autoComplete="new_password"
+            id="password"
+            name="password"
+            onChange={formik.handleChange}
+            onInput={(e)=>{fillData(e)}}
+            placeholder="Password"
+            title="password"
+            type="password"
+            value={formik.password}
+          />
+        </div>
         {formik.errors.password ?
             <Error>{formik.errors.password}</Error> : null
         }
-        <label>Confirm password: </label>
-        <InputSt
-          autoComplete="new-password"
-          id="password_confirmation"
-          name="password_confirmation"
-          onChange={formik.handleChange}
-          onInput={(e)=>{fillData(e)}}
-          placeholder="Repeat password"
-          title="password_confirmation"
-          type="password"
-          value={formik.password_confirmation}
-        />
+        <div>
+          <label>Confirm password: </label>
+          <InputSt
+            autoComplete="new-password"
+            id="password_confirmation"
+            name="password_confirmation"
+            onChange={formik.handleChange}
+            onInput={(e)=>{fillData(e)}}
+            placeholder="Repeat password"
+            title="password_confirmation"
+            type="password"
+            value={formik.password_confirmation}
+          />
+        </div>
         {formik.errors.password_confirmation ?
             <Error>{formik.password_confirmation}</Error> : null
         }

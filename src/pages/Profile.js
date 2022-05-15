@@ -18,7 +18,7 @@ const Profile = (props) => {
       };
   
       try {
-        let res = await axios.get('http://localhost:8000/api/users/profile/complete', config);
+        let res = await axios.get('https://quiet-shelf-00426.herokuapp.com/api/users/profile/complete', config);
         if(res.data.message === 'User is complete') {
           setIsProfileIncomplete(false);
         } else {

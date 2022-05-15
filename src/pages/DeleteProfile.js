@@ -21,7 +21,7 @@ const DeleteProfile = (props) => {
 
     // Update logout status in server
     try {
-      await axios.post('http://localhost:8000/api/users/logout', {}, config);
+      await axios.post('https://quiet-shelf-00426.herokuapp.com/api/users/logout', {}, config);
   
       // Delete credentials from redux
       props.dispatch({ type: LOGOUT });
@@ -40,7 +40,7 @@ const DeleteProfile = (props) => {
     };
 
     try {
-      let res = await axios.delete('http://localhost:8000/api/users/', config);
+      let res = await axios.delete('https://quiet-shelf-00426.herokuapp.com/api/users/', config);
 
       setIsLoading(false);
       setIsEdited(true);

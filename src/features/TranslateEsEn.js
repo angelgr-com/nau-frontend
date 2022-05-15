@@ -29,7 +29,7 @@ const TranslateEnEs = (props) => {
         let cefr_url = {cefr};
         if(page === 1) {
           res = await axios.get(
-            'http://localhost:8000/api/texts/cefr/'+cefr_url.cefr,
+            'https://quiet-shelf-00426.herokuapp.com/api/texts/cefr/'+cefr_url.cefr,
             config
           );
         } else {
@@ -37,7 +37,7 @@ const TranslateEnEs = (props) => {
           let pagination_url = '?page=';
           let page_url = {page};
           res = await axios.get(
-            'http://localhost:8000/api/texts/cefr/'
+            'https://quiet-shelf-00426.herokuapp.com/api/texts/cefr/'
             +cefr_url.cefr
             +pagination_url
             +page_url.page,
@@ -52,12 +52,12 @@ const TranslateEnEs = (props) => {
         setDifficulty(res.data.data[0].difficulty);
         setType(res.data.data[0].type);
         let aut = await axios.get(
-          'http://localhost:8000/api/texts/author/' + 
+          'https://quiet-shelf-00426.herokuapp.com/api/texts/author/' + 
           res.data.data[0].author_id, config
         );
         setAuthor(aut.data.author);
         let tra = await axios.get(
-          'http://localhost:8000/api/texts/en-es/' + 
+          'https://quiet-shelf-00426.herokuapp.com/api/texts/en-es/' + 
           res.data.data[0].id, config
         );
         setEnEs(tra.data.esText);

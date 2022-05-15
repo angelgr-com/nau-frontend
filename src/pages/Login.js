@@ -38,7 +38,7 @@ const Login = (props) => {
     }
 
     try {
-      let result = await axios.post('http://localhost:8000/api/users/login', body);
+      let result = await axios.post('https://quiet-shelf-00426.herokuapp.com/api/users/login', body);
       setIsLoading(false);
       setIsLogged(true);
       props.dispatch({type:LOGIN, payload: result.data});
@@ -58,26 +58,30 @@ const Login = (props) => {
       <h1>Login to access your profile</h1>
       <p>Don't have an account? <a href='/register'>Sign Up</a></p>
       <form id="login" method="post" autoComplete="on">
-        <label>Email: </label>
-        <InputSt
-          autoComplete="email"
-          id="email"
-          name="email"
-          placeholder="Email"
-          title="email"
-          type="email"
-          onInput={(e)=>{fillData(e)}}
-        />
-        <label>Password: </label>
-        <InputSt
-          autoComplete="new_password"
-          id="password"
-          name="password"
-          placeholder="Password"
-          title="password"
-          type="password"
-          onInput={(e)=>{fillData(e)}}
-        />
+        <div>
+          <label>Email: </label>
+          <InputSt
+            autoComplete="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            title="email"
+            type="email"
+            onInput={(e)=>{fillData(e)}}
+          />
+        </div>
+        <div>
+          <label>Password: </label>
+          <InputSt
+            autoComplete="new_password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            title="password"
+            type="password"
+            onInput={(e)=>{fillData(e)}}
+          />
+        </div>
         <p><a href='/login'>Forgot password?</a></p>
         {isLoading && <Info>Processing your request...</Info>}
         {isLogged && <Info>Login successful.</Info>}
