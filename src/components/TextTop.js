@@ -13,6 +13,7 @@ const TextTop = (props) => {
 }
 
 const TextTopSt = styled.div`
+  align-items: center;
   background-color: #fff;
   border: 0.1em solid rgb(255, 165, 0, 0.5);
   border-radius: 1em;
@@ -20,6 +21,7 @@ const TextTopSt = styled.div`
   display: flex;
   flex-grow: 1;
   justify-content: space-between;
+  flex-direction: column;
   min-height: 10em;
   width: 20em;
   @media only Screen and (max-width: 60em) {

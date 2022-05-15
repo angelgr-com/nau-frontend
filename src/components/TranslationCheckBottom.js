@@ -1,17 +1,16 @@
 import React from 'react'
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-import ButtonsTranslation from './ButtonsTranslation';
-import InputTranslation from './InputTranslation';
 
 const TranslationCheckBottom = (props) => {
   return (
     <TranslationBottomSt>
     <div>
       <ul>
-        <li><b>Hit rate: </b>90%</li>
-        <li><b>CEFR: </b>B1</li>
-        <li><b>Difficulty: </b>Medium</li>
-        <li><b>Type: </b>quote</li>
+        <li><b>Hit rate: </b>{props.hitrate*100} %</li>
+        <li><b>CEFR: </b>{props.cefr}</li>
+        <li><b>Difficulty: </b>{props.difficulty}</li>
+        <li><b>Type: </b>{props.type}</li>
       </ul>
     </div>
   </TranslationBottomSt>
@@ -39,4 +38,8 @@ const TranslationBottomSt = styled.div`
   }
 `;
 
-export default TranslationCheckBottom;
+export default connect((state) => ({
+  credentials: state.credentials,
+  textid: state.textid,
+  hitrate: state.hitrate,
+}))(TranslationCheckBottom);

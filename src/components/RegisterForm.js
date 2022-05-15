@@ -6,6 +6,8 @@ import { LOGIN } from '../store/types';
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components';
+import Info from '../components/Info';
+import Error from '../components/Error';
 
 const RegisterForm = (props) => {
   // To redirect user after register
@@ -67,7 +69,7 @@ const RegisterForm = (props) => {
     },
   });
 
-  // Handler
+  // Handlers
   const fillData = (e) => {
     setUserData({
       ...userData,
@@ -92,7 +94,6 @@ const RegisterForm = (props) => {
     try {
       setIsWrong(false);
       const res = await axios.post('http://localhost:8000/api/users', body);
-      console.log('res: ', res);
       setIsLoading(false);
       setIsRegistered(true);
       props.dispatch({type:LOGIN, payload: res.data});
@@ -101,10 +102,8 @@ const RegisterForm = (props) => {
       }, 2000);
     } catch (error) {
       setIsLoading(false);
-      console.log('axios error: ', error);
       setErrorMessage(error.response.data.message);
       setIsWrong(true);
-      // console.log('axios errorMessage: ', error.response.data.message);
     }
   }
 
@@ -216,13 +215,6 @@ const RegisterForm = (props) => {
 }
   
 // Styled components
-
-const Error = styled.div`
-  color: red;
-`;
-const Info = styled.div`
-  color: green;
-`;
 
 const Button = styled.a`
   align-items: center;

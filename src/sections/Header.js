@@ -11,15 +11,12 @@ const Header = (props) => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    // console.log('Redux credentials: ', props.credentials);
   });
 
   const logOut = async () => {
     const config = {
       headers: { Authorization: `Bearer ${props.credentials.token}` }
     };
-
-    console.log('config', config);
 
     // Update logout status in server
     try {
@@ -42,7 +39,6 @@ const Header = (props) => {
           <Navs>
             <a href="/register">Register</a>
             <Buttons href="/login"><FaUserAlt /></Buttons>
-            <Buttons href="/"><GrMenu /></Buttons>
           </Navs>
         </Container>
       </Headers>
@@ -54,20 +50,32 @@ const Header = (props) => {
         <Container>
           <Logos href="/">Naulan</Logos>
           <Navs>
-            <button onClick={() => logOut()}>Logout</button>
+            <Logout onClick={() => logOut()}>Logout</Logout>
             <Buttons href="/profile">
               <Row>
                 <FaUserAlt />
                 <UserName>{props.credentials.user.first_name}</UserName>
               </Row>
             </Buttons>
-            <Buttons href="/"><GrMenu /></Buttons>
+            {/* <Buttons href="/options"><GrMenu /></Buttons> */}
           </Navs>
         </Container>
       </Headers>
     )
   }
 }
+
+const Logout = styled.a`
+  align-items: center;
+  background-color: rgb(248, 165, 1, 70%);
+  padding-bottom: -0.25em;
+  border-radius: 0.5em;
+  cursor: pointer;
+  display: flex;
+  height: 2em;
+  justify-content: center;
+  width: 4em;
+`;
 
 const Row = styled.div`
   display: flex;
@@ -92,11 +100,14 @@ const Headers = styled.header`
   position: sticky;
   top: 0;
   z-index: 1000;
+  @media only Screen and (max-width: 60em) {
+    min-width: 15em;
+  }
   @media only Screen and (max-width: 48em) {
-    padding: 1rem 2rem;
+    padding: 1.5rem;
   }
   @media only Screen and (max-width: 30em) {
-    padding: 0.5rem 2rem;
+    padding: 0.75rem;
   }
 `;
 

@@ -14,6 +14,15 @@ const TextSt = styled.div`
   padding: 0.4em;
   text-align: center;
   margin: 1em;
+  @media only Screen and (max-width: 60em) {
+    width: 15em;
+  }
+  @media only Screen and (max-width: 48em) {
+    width: 17em;
+  }
+  @media only Screen and (max-width: 30em) {
+    width: 10em;
+  }
 `;
 
 export default Text;

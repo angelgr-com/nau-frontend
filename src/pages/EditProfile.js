@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import styled from 'styled-components';
 import { MODIFY_CREDENTIALS } from '../store/types';
+import CompleteProfile from '../sections/CompleteProfile';
 
 const EditProfile = (props) => {
   let navigate = useNavigate();
@@ -44,7 +45,6 @@ const EditProfile = (props) => {
       if(res) {
         props.dispatch({type: MODIFY_CREDENTIALS, payload: body});
       }
-      console.log('result: ', res);
       setIsLoading(false);
       setIsEdited(true);
       setTimeout(()=>{
@@ -52,54 +52,62 @@ const EditProfile = (props) => {
       }, 2000);
     } catch (error) {
       setIsLoading(false);
-      // console.log('userData: ', userData);
-      // console.log('body: ', body);
-      // console.log('axios error: ', error);
       setErrorMessage(error.response.data.message);
       setIsWrong(true);
-      // console.log('axios errorMessage: ', error.response.data.message);
     }
   }
 
   
   return (
-    <EditProfileSt>
+    <>
       <h1>Edit your profile</h1>
-      <form id="edit-profile" method="post" autoComplete="off">
-        <label>First Name: </label>
-        <InputSt
-          id="first-name"
-          name="first-name"
-          defaultValue={props.credentials.user.first_name}
-          title="first-name"
-          type="text"
-          onChange={firstNameChange}
-          contenteditable
-        />
-        <label>Username: </label>
-        <InputSt
-          id="first-name"
-          name="first-name"
-          defaultValue={props.credentials.user.username}
-          title="first-name"
-          type="text"
-          onChange={usernameChange}
-        />
-        <label>Email: </label>
-        <InputSt
-          id="email"
-          name="email"
-          defaultValue={props.credentials.user.email}
-          title="email"
-          type="text"
-          onChange={emailChange}
-        />
-        {isLoading && <Info>Processing your request...</Info>}
-        {isEdited && <Info>Edit successful.</Info>}
-        {isWrong && <Error>{errorMessage} {isWrong}</Error>}
-        <Button onClick={() => sendEditedProfile()}>Save changes</Button>
-      </form>
-    </EditProfileSt>
+
+      <EditProfileSt>
+        <h2>Change your personal data</h2>
+        <form id="edit-profile" method="post" autoComplete="off">
+          <div>
+            <label>First Name: </label>
+            <InputSt
+              id="first-name"
+              name="first-name"
+              defaultValue={props.credentials.user.first_name}
+              title="first-name"
+              type="text"
+              onChange={firstNameChange}
+              contenteditable
+            />
+          </div>
+          <div>
+            <label>Username: </label>
+            <InputSt
+              id="first-name"
+              name="first-name"
+              defaultValue={props.credentials.user.username}
+              title="first-name"
+              type="text"
+              onChange={usernameChange}
+            />
+          </div>
+          <div>
+            <label>Email: </label>
+            <InputSt
+              id="email"
+              name="email"
+              defaultValue={props.credentials.user.email}
+              title="email"
+              type="text"
+              onChange={emailChange}
+            />
+          </div>
+          {isLoading && <Info>Processing your request...</Info>}
+          {isEdited && <Info>Edit successful.</Info>}
+          {isWrong && <Error>{errorMessage} {isWrong}</Error>}
+          <Button onClick={() => sendEditedProfile()}>Save changes</Button>
+        </form>
+      </EditProfileSt>
+
+      <CompleteProfile headerText='Change your learning profile' />
+    </>
   );
 }
 
@@ -144,8 +152,8 @@ const EditProfileSt = styled.div`
     margin-bottom: 25em;
   }
   @media only Screen and (max-width: 30em) {
-    min-width: 20em;
-    max-width: 20em;
+    min-width: 16em;
+    max-width: 16em;
     margin-bottom: 4em;
   }
 `;

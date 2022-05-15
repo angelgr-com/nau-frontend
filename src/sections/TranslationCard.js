@@ -1,16 +1,16 @@
-import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import TextTop from '../components/TextTop';
-import TranslationBottom from '../components/TranslationBottom';
+import TranslationCardBottom from '../components/TranslationCardBottom';
 
 const TranslationCard = (props) => {
+
   return (
     <TranslationCardSt>
       <TextTop
         text={props.text}
-        author={props.author}
       />
-      <TranslationBottom />
+      <TranslationCardBottom />
     </TranslationCardSt>
   )
 }
@@ -40,4 +40,6 @@ const TranslationCardSt = styled.div`
   }
 `;
 
-export default TranslationCard;
+export default connect((state) => ({
+  credentials: state.credentials,
+}))(TranslationCard);

@@ -39,7 +39,6 @@ const Login = (props) => {
 
     try {
       let result = await axios.post('http://localhost:8000/api/users/login', body);
-      // console.log('result: ', result);
       setIsLoading(false);
       setIsLogged(true);
       props.dispatch({type:LOGIN, payload: result.data});
@@ -48,12 +47,8 @@ const Login = (props) => {
       }, 2000);
     } catch (error) {
       setIsLoading(false);
-      // console.log('userData: ', userData);
-      // console.log('body: ', body);
-      // console.log('axios error: ', error);
       setErrorMessage(error.response.data.message);
       setIsWrong(true);
-      // console.log('axios errorMessage: ', error.response.data.message);
     }
   }
 

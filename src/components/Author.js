@@ -14,7 +14,16 @@ const AuthorSt = styled.div`
   font-style: italic;
   font-weight: bold;
   justify-content: flex-end;
-  padding: 1em;
+  padding: 0.25em;
+  @media only Screen and (max-width: 60em) {
+    width: 15em;
+  }
+  @media only Screen and (max-width: 48em) {
+    width: 17em;
+  }
+  @media only Screen and (max-width: 30em) {
+    width: 5em;
+  }
 `;
 
 export default Author;
