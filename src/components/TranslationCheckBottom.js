@@ -8,10 +8,10 @@ const TranslationCheckBottom = (props) => {
     <TranslationBottomSt>
     <div>
       <ul>
-        <li><b>Hit rate: </b>90%</li>
-        <li><b>CEFR: </b>B1</li>
-        <li><b>Difficulty: </b>Medium</li>
-        <li><b>Type: </b>quote</li>
+        <li><b>Hit rate: </b>{}</li>
+        <li><b>CEFR: </b>{props.cefr}</li>
+        <li><b>Difficulty: </b>{props.difficulty}</li>
+        <li><b>Type: </b>{props.type}</li>
       </ul>
     </div>
   </TranslationBottomSt>

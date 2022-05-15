@@ -7,10 +7,15 @@ const TranslationCheck = (props) => {
   return (
     <TranslationCheckSt>
       <TextTop
-        text='Las grandes cosas no se hacen por impulso, sino por una serie de pequeñas cosas reunidas.'
-        author='Vincent Van Gogh'
+        text={props.text}
+        author={props.author}
       />
-      <TranslationCheckBottom />
+      <TranslationCheckBottom
+        cefr={props.cefr}
+        difficulty={props.difficulty}
+        type={props.type}
+        author={props.author}
+      />
     </TranslationCheckSt>
   )
 }
