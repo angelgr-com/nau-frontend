@@ -90,7 +90,7 @@ const TranslateEnEs = (props) => {
       console.log('cefr indexOf', cefr);
       let index = level.indexOf(cefr);
       console.log('index', index);
-      if(index+1 <= count.level) {
+      if(index+1 <= level.length) {
         setCefr(level[index+1]);
       } else {
         console.log('This was the last text to translate')
