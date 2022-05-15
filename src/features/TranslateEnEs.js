@@ -88,11 +88,9 @@ const TranslateEnEs = (props) => {
       setPage(page+1);
       console.log('page: ', page);
     } else {
-      // const fruits = ["Banana", "Orange", "Apple", "Mango", "Apple"];
-      // let index = fruits.indexOf("Apple", 3);
-      console.log('cefr indexOf', cefr);
+      // console.log('cefr indexOf', cefr);
       let index = level.indexOf(cefr);
-      console.log('index', index);
+      // console.log('index', index);
       if(index+1 <= level.length) {
         setCefr(level[index+1]);
       } else {
