@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import TextTop from '../components/TextTop';
-import TranslationBottom from '../components/TranslationBottom';
+import TranslationCardBottom from '../components/TranslationCardBottom';
 
 const TranslationCard = (props) => {
 
@@ -9,9 +9,8 @@ const TranslationCard = (props) => {
     <TranslationCardSt>
       <TextTop
         text={props.text}
-        author={props.author}
       />
-      <TranslationBottom />
+      <TranslationCardBottom />
     </TranslationCardSt>
   )
 }

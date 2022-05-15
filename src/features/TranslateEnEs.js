@@ -80,5 +80,5 @@ const TranslateEnEsSt = styled.div`
 
 export default connect((state) => ({
   credentials: state.credentials,
-  // text: state.text,
+  // textStore: state.textStore,
 }))(TranslateEnEs);

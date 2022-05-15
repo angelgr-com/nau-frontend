@@ -1,7 +1,5 @@
 import React from 'react'
 import styled from 'styled-components';
-import ButtonsTranslation from './ButtonsTranslation';
-import InputTranslation from './InputTranslation';
 
 const TranslationCheckBottom = (props) => {
   return (
