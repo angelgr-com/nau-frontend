@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { TEXTID } from '../store/types';
+import { TEXTID, SUBMITED } from '../store/types';
 import axios from 'axios';
 import styled from 'styled-components';
 import TranslationCard from '../sections/TranslationCard';
@@ -11,12 +11,12 @@ const TranslateEnEs = (props) => {
   const [text_id, setText_Id] = useState('');
   const [enEs, setEnEs] = useState('');
   const [cefr, setCefr] = useState('A1');
-  const [pagination, setPagination] = useState('?page=');
   const [page, setPage] = useState(1);
   const [nextPageUrl, setNextPageUrl] = useState('');
   const [difficulty, setDifficulty] = useState('');
   const [type, setType] = useState('');
   const [author, setAuthor] = useState('');
+  const [isTextSubmited, setIsTextSubmited] = useState(false);
 
   useEffect(()=>{
     async function retrieveTexts() {
@@ -38,12 +38,12 @@ const TranslateEnEs = (props) => {
           );
         } else {
           let cefr_url = {cefr};
-          let pagination_url = {pagination};
+          let pagination_url = '?page=';
           let page_url = {page};
           res = await axios.get(
             'http://localhost:8000/api/texts/cefr/'
             +cefr_url.cefr
-            +pagination_url.pagination
+            +pagination_url
             +page_url.page,
             config
           );
@@ -76,7 +76,10 @@ const TranslateEnEs = (props) => {
     retrieveTexts();
   }, [page]);
 
+
   const nextText = () => {
+    setIsTextSubmited(false);
+    props.dispatch({type: SUBMITED, payload: isTextSubmited});
     // console.log('nextText!');
     // console.log('nextPageUrl: ', nextPageUrl);
     // console.log('page before increment: ', page);
@@ -99,6 +102,25 @@ const TranslateEnEs = (props) => {
     }
   }
 
+  const showTranslationCheck = () => {
+    if(isTextSubmited) {
+      return (
+        <TranslationCheck
+          enEs={enEs}
+          cefr={cefr}
+          difficulty={difficulty}
+          type={type}
+          author={author}
+        />
+      );
+    }
+  };
+
+
+  const showAnswer = () => {
+    setIsTextSubmited(!isTextSubmited);
+  };
+
   return (
     <>
       <TranslateEnEsSt>
@@ -107,14 +129,9 @@ const TranslateEnEs = (props) => {
           text_id={text_id}
           author={author}
         />
-        <TranslationCheck
-          enEs={enEs}
-          cefr={cefr}
-          difficulty={difficulty}
-          type={type}
-          author={author}
-        />
+        {showTranslationCheck()}
       </TranslateEnEsSt>
+      <Button onClick={() => showAnswer()}>Show answer</Button>
       <Button onClick={() => nextText()}>Next</Button>
     </>
   );
@@ -141,4 +158,5 @@ export default connect((state) => ({
   credentials: state.credentials,
   textid: state.textid,
   hitrate: state.hitrate,
+  submited: state.submited,
 }))(TranslateEnEs);

@@ -9,7 +9,7 @@ const Feature = (props) => {
         <Header>{props.header}</Header>
         <Paragraph>{props.paragraph}</Paragraph>
       </Description>
-      {/* <TranslationCard /> */}
+      <TranslationCard />
     </Features>
   )
 };

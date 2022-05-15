@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { HITRATE } from '../store/types';
+import { HITRATE, SUBMITED } from '../store/types';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -8,9 +8,10 @@ const TranslationBottom = (props) => {
   // Hooks
   const [userTranslation, setUserTranslation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
   const [isWrong, setIsWrong] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isTextSubmited, setIsTextSubmited] = useState(false);
+
 
   // Handlers
   const fillData = (e) => {
@@ -23,6 +24,10 @@ const TranslationBottom = (props) => {
     const config = {
       headers: { Authorization: `Bearer ${props.credentials.token}` }
     };
+    console.log('setIsTextNotSubmited: false');
+    setIsTextSubmited(true);
+    props.dispatch({type: SUBMITED, payload: isTextSubmited});
+  
     let body = {
       language: 'Spanish',
       text: userTranslation,
@@ -33,6 +38,7 @@ const TranslationBottom = (props) => {
     // console.log('props: ', props);
 
     try {
+      setIsLoading(true);
       let res = await axios.post(
         'http://localhost:8000/api/texts/translation',
         body,
@@ -42,7 +48,7 @@ const TranslationBottom = (props) => {
       
       props.dispatch({type: HITRATE, payload: res.data.translation.hit_rate});
       // console.log('props hit_rate: ', props);
-
+      setIsLoading(false);
     } catch (error) {
       console.log('error: ', error.response.data.message);
     }
@@ -60,7 +66,6 @@ const TranslationBottom = (props) => {
           onInput={(e)=>{fillData(e)}}
         />
         {isLoading && <Info>Processing your request...</Info>}
-        {isChecked && <Info>Text checked successfully.</Info>}
         {isWrong && <Error>{errorMessage} {isWrong}</Error>}
       </div>
       <Button onClick={() => saveTranslation()}>Check</Button>

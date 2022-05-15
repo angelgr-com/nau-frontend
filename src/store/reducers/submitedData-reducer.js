@@ -1,14 +1,14 @@
 import {
-    HITRATE,
+    SUBMITED,
 } from '../types';
 
 const initialState = {
-    hitrate : '',
+    submited : false,
 };
 
-const hitrateDataReducer = (state = initialState, action) => {
+const submitedDataReducer = (state = initialState, action) => {
     switch(action.type){        
-        case HITRATE:
+        case SUBMITED:
             return action.payload;
 
         default:
@@ -16,4 +16,4 @@ const hitrateDataReducer = (state = initialState, action) => {
     }
 }
 
-export default hitrateDataReducer;
+export default submitedDataReducer;
