@@ -78,6 +78,17 @@ const Button = styled.a`
   justify-content: center;
   margin-bottom: 1em;
   width: auto;
+  @media only Screen and (max-width: 60em) {
+    min-width: 15em;
+  }
+  @media only Screen and (max-width: 48em) {
+    padding: 1.5rem;
+  }
+  @media only Screen and (max-width: 30em) {
+    padding: 0.75rem;
+    height: 3em;
+    width: 4em;
+  }
 `;
 
 const RegisterSt = styled.div`
@@ -87,23 +98,20 @@ const RegisterSt = styled.div`
   justify-content: center;
   margin: 1em 2em 1em 1em;
   max-width: 76em;
-  /* min-height: 20em; */
-  min-width: 76em;
+  min-width: 50em;
   padding: 2em;
   @media only Screen and (max-width: 60em) {
     min-width: 45em;
     max-width: 45em;
-    margin-bottom: 40em;
   }
   @media only Screen and (max-width: 48em) {
     min-width: 40em;
     max-width: 40em;
-    margin-bottom: 25em;
   }
   @media only Screen and (max-width: 30em) {
-    min-width: 20em;
-    max-width: 20em;
-    margin-bottom: 4em;
+    min-width: 18em;
+    max-width: 18em;
+    margin: 1em 1em 1em 1em;
   }
 `;
 
