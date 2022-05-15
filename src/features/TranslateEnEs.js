@@ -29,14 +29,16 @@ const TranslateEnEs = (props) => {
       // console.log('page: ', page);
       try {
         let res = null;
-        let cefr_url = {cefr};
+        let cefr_url = cefr;
+        // console.log('cefr_url: ', cefr_url)
         // console.log('cefr_url: ', cefr_url.cefr);
         if(page === 1) {
           res = await axios.get(
-            'http://localhost:8000/api/texts/cefr/'+cefr_url.cefr,
+            'http://localhost:8000/api/texts/cefr/'+cefr_url,
             config
           );
-        } else {
+        }
+        else {
           let cefr_url = {cefr};
           let pagination_url = '?page=';
           let page_url = {page};
@@ -86,7 +88,7 @@ const TranslateEnEs = (props) => {
     let level = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
     if(nextPageUrl != null) {
       setPage(page+1);
-      console.log('page: ', page);
+      // console.log('page: ', page);
     } else {
       // console.log('cefr indexOf', cefr);
       let index = level.indexOf(cefr);

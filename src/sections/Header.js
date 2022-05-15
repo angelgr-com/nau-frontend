@@ -42,7 +42,6 @@ const Header = (props) => {
           <Navs>
             <a href="/register">Register</a>
             <Buttons href="/login"><FaUserAlt /></Buttons>
-            <Buttons href="/"><GrMenu /></Buttons>
           </Navs>
         </Container>
       </Headers>
@@ -61,7 +60,7 @@ const Header = (props) => {
                 <UserName>{props.credentials.user.first_name}</UserName>
               </Row>
             </Buttons>
-            <Buttons href="/"><GrMenu /></Buttons>
+            {/* <Buttons href="/options"><GrMenu /></Buttons> */}
           </Navs>
         </Container>
       </Headers>
