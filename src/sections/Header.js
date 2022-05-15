@@ -53,7 +53,7 @@ const Header = (props) => {
         <Container>
           <Logos href="/">Naulan</Logos>
           <Navs>
-            <button onClick={() => logOut()}>Logout</button>
+            <Logout onClick={() => logOut()}>Logout</Logout>
             <Buttons href="/profile">
               <Row>
                 <FaUserAlt />
@@ -67,6 +67,18 @@ const Header = (props) => {
     )
   }
 }
+
+const Logout = styled.a`
+  align-items: center;
+  background-color: rgb(248, 165, 1, 70%);
+  padding-bottom: -0.25em;
+  border-radius: 0.5em;
+  cursor: pointer;
+  display: flex;
+  height: 2em;
+  justify-content: center;
+  width: 4em;
+`;
 
 const Row = styled.div`
   display: flex;

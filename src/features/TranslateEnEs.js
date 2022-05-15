@@ -116,13 +116,13 @@ const TranslateEnEs = (props) => {
     }
   };
 
-
   const showAnswer = () => {
     setIsTextSubmited(!isTextSubmited);
   };
 
   return (
     <>
+      <HeaderSection>Test your skill level (CEFR)</HeaderSection>
       <TranslateEnEsSt>
         <TranslationCard
           text={text}
@@ -131,15 +131,30 @@ const TranslateEnEs = (props) => {
         />
         {showTranslationCheck()}
       </TranslateEnEsSt>
-      <Button onClick={() => showAnswer()}>Show answer</Button>
+      <Button onClick={() => showAnswer()}>Show/hide answer</Button>
       <Button onClick={() => nextText()}>Next</Button>
     </>
   );
 }
 
+// Styled components
+const HeaderSection = styled.h2`
+  text-align: center;
+  margin: 1.5em 0 0.5em 0;
+`;
+
 const TranslateEnEsSt = styled.div`
   display: flex;
   flex-direction: row;
+  @media only Screen and (max-width: 60em) {
+    min-width: 15em;
+  }
+  @media only Screen and (max-width: 48em) {
+    padding: 1.5rem;
+  }
+  @media only Screen and (max-width: 30em) {
+    flex-direction: column;
+  }
 `;
 
 const Button = styled.a`
@@ -148,10 +163,20 @@ const Button = styled.a`
   border-radius: 0.5em;
   cursor: pointer;
   display: flex;
-  height: 2em;
+  height: 3em;
   justify-content: center;
+  text-align: center;
   margin-bottom: 1em;
-  width: auto;
+  width: 8em;
+  @media only Screen and (max-width: 60em) {
+    width: 15em;
+  }
+  @media only Screen and (max-width: 48em) {
+    width: 17em;
+  }
+  @media only Screen and (max-width: 30em) {
+    width: 12em;
+  }
 `;
 
 export default connect((state) => ({

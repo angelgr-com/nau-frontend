@@ -84,7 +84,7 @@ const Button = styled.a`
   height: 2em;
   justify-content: center;
   margin-bottom: 1em;
-  width: auto;
+  width: 5em;
 `;
 
 const TranslationBottomSt = styled.div`
@@ -116,6 +116,7 @@ const Info = styled.div`
 const InputTranslationSt = styled.textarea`
   border-radius: 0.5em;
   border: 0.1em solid var(--bl1);
+  padding: 0.25em;
   min-height: 8em;
   min-width: 21em;
   margin-top: 1em;

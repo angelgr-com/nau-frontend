@@ -157,8 +157,8 @@ const EditProfileSt = styled.div`
     margin-bottom: 25em;
   }
   @media only Screen and (max-width: 30em) {
-    min-width: 20em;
-    max-width: 20em;
+    min-width: 16em;
+    max-width: 16em;
     margin-bottom: 4em;
   }
 `;

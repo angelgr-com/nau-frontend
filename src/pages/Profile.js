@@ -66,8 +66,8 @@ const Profile = (props) => {
     </>
   )
 }
-// Styled components
 
+// Styled components
 const Button = styled.a`
   align-items: center;
   background-color: orange;

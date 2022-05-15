@@ -99,23 +99,23 @@ const DeleteProfileSt = styled.div`
   flex-direction: column;
   justify-content: center;
   margin: 1em 2em 1em 1em;
-  max-width: 76em;
+  max-width: 40em;
   min-height: 20em;
-  min-width: 76em;
+  min-width: 46em;
   padding: 2em;
   @media only Screen and (max-width: 60em) {
-    min-width: 45em;
-    max-width: 45em;
+    min-width: 30em;
+    max-width: 30em;
     margin-bottom: 40em;
   }
   @media only Screen and (max-width: 48em) {
-    min-width: 40em;
-    max-width: 40em;
+    min-width: 30em;
+    max-width: 30em;
     margin-bottom: 25em;
   }
   @media only Screen and (max-width: 30em) {
-    min-width: 20em;
-    max-width: 20em;
+    min-width: 16em;
+    max-width: 16em;
     margin-bottom: 4em;
   }
 `;
