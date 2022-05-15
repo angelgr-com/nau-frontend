@@ -19,7 +19,7 @@ const TranslationBottom = (props) => {
   // console.log('userTranslation', userTranslation);
 
   const saveTranslation = async () => {
-    console.log('props: ', props)
+    // console.log('props: ', props)
     const config = {
       headers: { Authorization: `Bearer ${props.credentials.token}` }
     };
@@ -28,7 +28,7 @@ const TranslationBottom = (props) => {
       text: userTranslation,
       text_id: props.textid,
     }
-    console.log('TranslationCardBottom body: ', body);
+    // console.log('TranslationCardBottom body: ', body);
     // console.log('props.textid: ', props.textid);
     // console.log('props: ', props);
 
@@ -38,10 +38,10 @@ const TranslationBottom = (props) => {
         body,
         config
       );
-      console.log('res: ', res);
+      // console.log('res: ', res);
       
       props.dispatch({type: HITRATE, payload: res.data.translation.hit_rate});
-      console.log('props hit_rate: ', props);
+      // console.log('props hit_rate: ', props);
 
     } catch (error) {
       console.log('error: ', error.response.data.message);
