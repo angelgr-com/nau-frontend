@@ -120,6 +120,15 @@ const InputTranslationSt = styled.textarea`
   min-width: 21em;
   margin-top: 1em;
   width: 90%;
+  @media only Screen and (max-width: 60em) {
+    min-width: 15em;
+  }
+  @media only Screen and (max-width: 48em) {
+    min-width: 18em;
+  }
+  @media only Screen and (max-width: 30em) {
+    min-width: 12em;
+  }
 `;
 
 export default connect((state) => ({

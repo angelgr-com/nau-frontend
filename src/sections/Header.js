@@ -91,11 +91,14 @@ const Headers = styled.header`
   position: sticky;
   top: 0;
   z-index: 1000;
+  @media only Screen and (max-width: 60em) {
+    min-width: 15em;
+  }
   @media only Screen and (max-width: 48em) {
-    padding: 1rem 2rem;
+    padding: 1.5rem;
   }
   @media only Screen and (max-width: 30em) {
-    padding: 0.5rem 2rem;
+    padding: 0.75rem;
   }
 `;
 

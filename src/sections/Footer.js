@@ -6,12 +6,12 @@ const Footer = () => {
 
   return (
     <Footers>
-      <p>Inspirational quotes provided by <a href="https://zenquotes.io/" target="_blank">ZenQuotes API</a></p>
+      <p>Inspirational quotes provided by <Link href="https://zenquotes.io/" target="_blank" rel="noopener noreferrer">ZenQuotes API</Link></p>
       <p>
         © {now.getFullYear()} Naulan
       </p>
       <p>
-        <a href='/login'>Terms of Use</a> | <a href='/login'>Privacy Policy</a>
+        <Link href='/'>Terms of Use</Link> | <Link href='/'>Privacy Policy</Link>
       </p>
     </Footers>
   )
@@ -26,6 +26,19 @@ const Footers = styled.div`
   height: 6em;
   justify-content: center;
   padding: 1rem 5rem;
+  @media only Screen and (max-width: 48em) {
+    height: auto;
+    text-align: center;
+  }
+  @media only Screen and (max-width: 30em) {
+    height: auto;
+    text-align: center;
+  }
+`;
+
+const Link = styled.a`
+  color: #aaa;
+  font-weight: light;
 `;
 
 export default Footer;
