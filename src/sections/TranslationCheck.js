@@ -7,7 +7,7 @@ const TranslationCheck = (props) => {
   return (
     <TranslationCheckSt>
       <TextTop
-        text={props.text}
+        text={props.enEs}
         author={props.author}
       />
       <TranslationCheckBottom

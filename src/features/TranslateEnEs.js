@@ -9,6 +9,7 @@ import TranslationCheck from '../sections/TranslationCheck';
 const TranslateEnEs = (props) => {
   const [text, setText] = useState('');
   const [text_id, setText_Id] = useState('');
+  const [enEs, setEnEs] = useState('');
   const [cefr, setCefr] = useState('');
   const [difficulty, setDifficulty] = useState('');
   const [type, setType] = useState('');
@@ -25,10 +26,10 @@ const TranslateEnEs = (props) => {
           'http://localhost:8000/api/texts/cefr/a1',
           config
         );
-        // console.log(res.data.data[0]);
+        console.log('res.data.data[0]', res.data.data[0]);
         setText(res.data.data[0].text);
         console.log('res.data.data[0].text', res.data.data[0].text);
-        setText_Id(res.data.data[0].text_id);
+        setText_Id(res.data.data[0].id);
         setCefr(res.data.data[0].cefr);
         // props.dispatch({type: TEXT_CEFR, payload: res.data.data[0].cefr});
         setDifficulty(res.data.data[0].difficulty);
@@ -41,12 +42,18 @@ const TranslateEnEs = (props) => {
         );
         // console.log('aut.data.author', aut);
         setAuthor(aut.data.author);
+        let tra = await axios.get(
+          'http://localhost:8000/api/texts/en-es/' + 
+          res.data.data[0].id, config
+        );
+        // console.log('aut.data.author', aut);
+        setEnEs(tra.data.esText);
       } catch (error) {
         console.log('error: ', error.response.data.message);
       }
     }
     retrieveTexts();
-  }, [text, author, cefr, difficulty, type, props.credentials.token]);
+  }, [text, author, cefr, difficulty, type, enEs, props.credentials.token]);
 
   return (
     <TranslateEnEsSt>
@@ -56,6 +63,7 @@ const TranslateEnEs = (props) => {
         author={author}
       />
       <TranslationCheck
+        enEs={enEs}
         cefr={cefr}
         difficulty={difficulty}
         type={type}
