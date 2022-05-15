@@ -10,7 +10,7 @@ const TranslateEnEs = (props) => {
   const [text, setText] = useState('');
   const [text_id, setText_Id] = useState('');
   const [enEs, setEnEs] = useState('');
-  const [cefr, setCefr] = useState('a1');
+  const [cefr, setCefr] = useState('A1');
   const [pagination, setPagination] = useState('?page=');
   const [page, setPage] = useState(1);
   const [nextPageUrl, setNextPageUrl] = useState('');
@@ -77,12 +77,25 @@ const TranslateEnEs = (props) => {
   }, [page]);
 
   const nextText = () => {
-    console.log('nextText!');
-    console.log('nextPageUrl: ', nextPageUrl);
-    console.log('page before increment: ', page);
+    // console.log('nextText!');
+    // console.log('nextPageUrl: ', nextPageUrl);
+    // console.log('page before increment: ', page);
+    let level = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
     if(nextPageUrl != null) {
       setPage(page+1);
       console.log('page: ', page);
+    } else {
+      // const fruits = ["Banana", "Orange", "Apple", "Mango", "Apple"];
+      // let index = fruits.indexOf("Apple", 3);
+      console.log('cefr indexOf', cefr);
+      let index = level.indexOf(cefr);
+      console.log('index', index);
+      if(index+1 <= count.level) {
+        setCefr(level[index+1]);
+      } else {
+        console.log('This was the last text to translate')
+      }
+      setPage(1);
     }
   }
 
