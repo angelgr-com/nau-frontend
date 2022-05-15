@@ -94,7 +94,6 @@ const RegisterForm = (props) => {
     try {
       setIsWrong(false);
       const res = await axios.post('http://localhost:8000/api/users', body);
-      console.log('res: ', res);
       setIsLoading(false);
       setIsRegistered(true);
       props.dispatch({type:LOGIN, payload: res.data});
@@ -103,10 +102,8 @@ const RegisterForm = (props) => {
       }, 2000);
     } catch (error) {
       setIsLoading(false);
-      console.log('axios error: ', error);
       setErrorMessage(error.response.data.message);
       setIsWrong(true);
-      // console.log('axios errorMessage: ', error.response.data.message);
     }
   }
 

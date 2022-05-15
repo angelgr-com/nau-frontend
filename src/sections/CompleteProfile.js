@@ -24,7 +24,6 @@ const CompleteProfile = (props) => {
       };
       try {
         const res = await axios.get('http://localhost:8000/api/texts/languages', config);
-        // console.log(res.data);
         setLanguagesList(res.data);
       } catch (error) {
         console.log(error);
@@ -40,7 +39,6 @@ const CompleteProfile = (props) => {
       };
       try {
         const res = await axios.get('http://localhost:8000/api/texts/countries', config);
-        // console.log(res.data);
         setCountriesList(res.data);
       } catch (error) {
         console.log(error);
@@ -65,20 +63,11 @@ const CompleteProfile = (props) => {
     try {
       setIsWrong(false);
       const res = await axios.post('http://localhost:8000/api/users/profile/add-data', body, config);
-      console.log('res: ', res);
       setIsLoading(false);
       setIsProfileComplete(true);
-      console.log('country: ', country);
-      console.log('nativeLanguage: ', nativeLanguage);
-      console.log('studyingLanguage: ', studyingLanguage);
-      console.log('isLoading: ', isLoading);
-      console.log('isProfileComplete: ', isProfileComplete);
-      console.log('isWrong: ', isWrong);
-      console.log('body: ', body);
     } catch (error) {
       setIsWrong(true);
       setIsLoading(false);
-      console.log('axios error: ', error);
       setErrorMessage(error.response.data.message);
     }
   }

@@ -11,15 +11,12 @@ const Header = (props) => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    // console.log('Redux credentials: ', props.credentials);
   });
 
   const logOut = async () => {
     const config = {
       headers: { Authorization: `Bearer ${props.credentials.token}` }
     };
-
-    console.log('config', config);
 
     // Update logout status in server
     try {

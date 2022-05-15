@@ -19,13 +19,11 @@ const Profile = (props) => {
   
       try {
         let res = await axios.get('http://localhost:8000/api/users/profile/complete', config);
-        // console.log('res.data.message: ', res.data.message);
         if(res.data.message === 'User is complete') {
           setIsProfileIncomplete(false);
         } else {
           setIsProfileIncomplete(true);
         }
-        // console.log('result: ', res);
       } catch (error) {
         console.log('error: ', error.response.data.message);
       }
@@ -49,7 +47,7 @@ const Profile = (props) => {
       <RegisterSt>
         <HeaderSection>Are you ready to practice?</HeaderSection>
         <Button onClick={() => navigate('/practice/en-es')}>Translate from English to Spanish</Button>
-        <Button onClick={() => navigate('/practice/es-en')}>Translate from Spanish to English</Button>
+        {/* <Button onClick={() => navigate('/practice/es-en')}>Translate from Spanish to English</Button> */}
       </RegisterSt>
 
       <RegisterSt>

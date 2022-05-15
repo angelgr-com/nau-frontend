@@ -75,7 +75,6 @@ const TranslateEnEs = (props) => {
     let level = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
     if(nextPageUrl != null) {
       setPage(page+1);
-      console.log('page: ', page);
     } else {
       let index = level.indexOf(cefr);
       if(index+1 <= level.length) {

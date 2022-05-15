@@ -7,6 +7,7 @@ import TranslationCard from '../sections/TranslationCard';
 import TranslationCheck from '../sections/TranslationCheck';
 
 const TranslateEnEs = (props) => {
+  const [loading,setLoading] = useState(true);
   const [text, setText] = useState('');
   const [text_id, setText_Id] = useState('');
   const [enEs, setEnEs] = useState('');
@@ -18,20 +19,21 @@ const TranslateEnEs = (props) => {
   const [author, setAuthor] = useState('');
   const [isTextSubmited, setIsTextSubmited] = useState(false);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    },4000);
+  },[]);
+
   useEffect(()=>{
     async function retrieveTexts() {
       // Bearer Token for API request
       const config = {
         headers: { Authorization: `Bearer ${props.credentials.token}` }
       };
-      // console.log('cefr: ', cefr);
-      // console.log('pagination: ', pagination);
-      // console.log('page: ', page);
       try {
         let res = null;
         let cefr_url = cefr;
-        // console.log('cefr_url: ', cefr_url)
-        // console.log('cefr_url: ', cefr_url.cefr);
         if(page === 1) {
           res = await axios.get(
             'http://localhost:8000/api/texts/cefr/'+cefr_url,
@@ -50,10 +52,8 @@ const TranslateEnEs = (props) => {
             config
           );
         }
-        // console.log('res.data.data[0]', res.data.data[0]);
         setText(res.data.data[0].text);
         setNextPageUrl(res.data.next_page_url);
-        // console.log('res.data.data[0].text', res.data.data[0].text);
         setText_Id(res.data.data[0].id);
         props.dispatch({type: TEXTID, payload: res.data.data[0].id});
         setCefr(res.data.data[0].cefr);
@@ -63,13 +63,11 @@ const TranslateEnEs = (props) => {
           'http://localhost:8000/api/texts/author/' + 
           res.data.data[0].author_id, config
         );
-        // console.log('aut.data.author', aut);
         setAuthor(aut.data.author);
         let tra = await axios.get(
           'http://localhost:8000/api/texts/en-es/' + 
           res.data.data[0].id, config
         );
-        // console.log('aut.data.author', aut);
         setEnEs(tra.data.esText);
       } catch (error) {
         console.log('error: ', error.response.data.message);
@@ -80,19 +78,17 @@ const TranslateEnEs = (props) => {
 
 
   const nextText = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    },5000);
     setIsTextSubmited(false);
     props.dispatch({type: SUBMITED, payload: isTextSubmited});
-    // console.log('nextText!');
-    // console.log('nextPageUrl: ', nextPageUrl);
-    // console.log('page before increment: ', page);
     let level = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
     if(nextPageUrl != null) {
       setPage(page+1);
-      // console.log('page: ', page);
     } else {
-      // console.log('cefr indexOf', cefr);
       let index = level.indexOf(cefr);
-      // console.log('index', index);
       if(index+1 <= level.length) {
         setCefr(level[index+1]);
       } else {
@@ -120,9 +116,13 @@ const TranslateEnEs = (props) => {
     setIsTextSubmited(!isTextSubmited);
   };
 
+
   return (
     <>
       <HeaderSection>Test your skill level (CEFR)</HeaderSection>
+      <Loading>
+        { loading ? "Loading text..." : ""}
+      </Loading>
       <TranslateEnEsSt>
         <TranslationCard
           text={text}
@@ -138,6 +138,10 @@ const TranslateEnEs = (props) => {
 }
 
 // Styled components
+const Loading = styled.h2`
+  color: orange;
+`;
+
 const HeaderSection = styled.h2`
   text-align: center;
   margin: 1.5em 0 0.5em 0;

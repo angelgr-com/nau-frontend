@@ -1,19 +1,51 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { LOGOUT } from '../store/types';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Button from '../components/Button';
 import HeaderSection from '../components/HeaderSection';
 import Paragraph from '../components/Paragraph';
 
-const Hero = () => {
-  return (
-    <HeroSt>
-      <HeaderSection text='Practice your writing skills' />
-      <Paragraph text='Great things are not done by impulse, but by a series of small things brought together.' />
-      <Paragraph text='Vincent Van Gogh' />
-      <Button text='Start practicing!'></Button>
-    </HeroSt>
-  )
+const Hero = (props) => {
+  let navigate = useNavigate();
+
+  // Render without credentials
+  if (!props.credentials?.token) {
+    return (
+      <HeroSt>
+        <HeaderSection text='Practice your writing skills' />
+        <Paragraph text='Great things are not done by impulse, but by a series of small things brought together.' />
+        <Author>Vincent Van Gogh</Author>
+        <Button
+          text='Register to start practicing'
+          onClick={() => navigate('/register')}
+        >
+        </Button>
+      </HeroSt>
+    )
+  // Render with credentilas
+  } else {
+    return (
+      <HeroSt>
+        <HeaderSection text='Practice your writing skills' />
+        <Paragraph text='Great things are not done by impulse, but by a series of small things brought together.' />
+        <Author>Vincent Van Gogh</Author>
+        <Button
+          text='Start practicing'
+          onClick={() => navigate('/practice/en-es')}
+        >
+        </Button>
+      </HeroSt>
+    )
+  }
+
 }
+
+const Author = styled.div`
+  font-weight: bold;
+  margin-bottom: 1em;
+`;
 
 const HeroSt = styled.div`
   box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
@@ -34,4 +66,6 @@ const HeroSt = styled.div`
   }
 `;
 
-export default Hero;
+export default connect((state) => ({
+  credentials: state.credentials
+}))(Hero);

@@ -8,8 +8,6 @@ const TranslationBottom = (props) => {
   // Hooks
   const [userTranslation, setUserTranslation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isWrong, setIsWrong] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
   const [isTextSubmited, setIsTextSubmited] = useState(false);
 
 
@@ -17,14 +15,11 @@ const TranslationBottom = (props) => {
   const fillData = (e) => {
     setUserTranslation(e.target.value);
   };
-  // console.log('userTranslation', userTranslation);
 
   const saveTranslation = async () => {
-    // console.log('props: ', props)
     const config = {
       headers: { Authorization: `Bearer ${props.credentials.token}` }
     };
-    console.log('setIsTextNotSubmited: false');
     setIsTextSubmited(true);
     props.dispatch({type: SUBMITED, payload: isTextSubmited});
   
@@ -33,9 +28,6 @@ const TranslationBottom = (props) => {
       text: userTranslation,
       text_id: props.textid,
     }
-    // console.log('TranslationCardBottom body: ', body);
-    // console.log('props.textid: ', props.textid);
-    // console.log('props: ', props);
 
     try {
       setIsLoading(true);
@@ -44,10 +36,8 @@ const TranslationBottom = (props) => {
         body,
         config
       );
-      // console.log('res: ', res);
       
       props.dispatch({type: HITRATE, payload: res.data.translation.hit_rate});
-      // console.log('props hit_rate: ', props);
       setIsLoading(false);
     } catch (error) {
       console.log('error: ', error.response.data.message);
@@ -66,7 +56,6 @@ const TranslationBottom = (props) => {
           onInput={(e)=>{fillData(e)}}
         />
         {isLoading && <Info>Processing your request...</Info>}
-        {isWrong && <Error>{errorMessage} {isWrong}</Error>}
       </div>
       <Button onClick={() => saveTranslation()}>Check</Button>
     </TranslationBottomSt>
@@ -107,9 +96,6 @@ const TranslationBottomSt = styled.div`
   }
 `;
 
-const Error = styled.div`
-  color: red;
-`;
 const Info = styled.div`
   color: green;
 `;
