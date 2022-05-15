@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { HITRATE } from '../store/types';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -17,6 +18,36 @@ const TranslationBottom = (props) => {
   };
   // console.log('userTranslation', userTranslation);
 
+  const saveTranslation = async () => {
+    console.log('props: ', props)
+    const config = {
+      headers: { Authorization: `Bearer ${props.credentials.token}` }
+    };
+    let body = {
+      language: 'Spanish',
+      text: userTranslation,
+      text_id: props.textid,
+    }
+    console.log('TranslationCardBottom body: ', body);
+    // console.log('props.textid: ', props.textid);
+    // console.log('props: ', props);
+
+    try {
+      let res = await axios.post(
+        'http://localhost:8000/api/texts/translation',
+        body,
+        config
+      );
+      console.log('res: ', res);
+      
+      props.dispatch({type: HITRATE, payload: res.data.translation.hit_rate});
+      console.log('props hit_rate: ', props);
+
+    } catch (error) {
+      console.log('error: ', error.response.data.message);
+    }
+  }
+
   return (
     <TranslationBottomSt>
       <div>
@@ -32,8 +63,7 @@ const TranslationBottom = (props) => {
         {isChecked && <Info>Text checked successfully.</Info>}
         {isWrong && <Error>{errorMessage} {isWrong}</Error>}
       </div>
-      {/* <ButtonsTranslation /> */}
-      <Button>Check</Button>
+      <Button onClick={() => saveTranslation()}>Check</Button>
     </TranslationBottomSt>
   )
 }
@@ -87,4 +117,8 @@ const InputTranslationSt = styled.textarea`
   width: 90%;
 `;
 
-export default TranslationBottom
+export default connect((state) => ({
+  credentials: state.credentials,
+  textid: state.textid,
+  hitrate: state.hitrate,
+}))(TranslationBottom);

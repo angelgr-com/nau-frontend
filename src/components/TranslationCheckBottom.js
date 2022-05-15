@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 const TranslationCheckBottom = (props) => {
@@ -6,7 +7,7 @@ const TranslationCheckBottom = (props) => {
     <TranslationBottomSt>
     <div>
       <ul>
-        <li><b>Hit rate: </b>{}</li>
+        <li><b>Hit rate: </b>{props.hitrate*100} %</li>
         <li><b>CEFR: </b>{props.cefr}</li>
         <li><b>Difficulty: </b>{props.difficulty}</li>
         <li><b>Type: </b>{props.type}</li>
@@ -37,4 +38,8 @@ const TranslationBottomSt = styled.div`
   }
 `;
 
-export default TranslationCheckBottom;
+export default connect((state) => ({
+  credentials: state.credentials,
+  textid: state.textid,
+  hitrate: state.hitrate,
+}))(TranslationCheckBottom);

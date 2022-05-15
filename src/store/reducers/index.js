@@ -1,11 +1,13 @@
 import {combineReducers} from 'redux';
 
 import credentials from './loginData-reducer';
-import text from './text-reducer';
+import textid from './textidData-reducer';
+import hitrate from './hitrateData-reducer';
 
 const rootReducer = combineReducers({
     credentials,
-    text
+    textid,
+    hitrate
 });
 
 export default rootReducer;

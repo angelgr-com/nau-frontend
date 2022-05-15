@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-// import { TEXT_CEFR, TEXT_DIFFICULTY, TEXT_TYPE } from '../store/types';
+import { TEXTID } from '../store/types';
 import axios from 'axios';
 import styled from 'styled-components';
 import TranslationCard from '../sections/TranslationCard';
@@ -26,16 +26,14 @@ const TranslateEnEs = (props) => {
           'http://localhost:8000/api/texts/cefr/a1',
           config
         );
-        console.log('res.data.data[0]', res.data.data[0]);
+        // console.log('res.data.data[0]', res.data.data[0]);
         setText(res.data.data[0].text);
-        console.log('res.data.data[0].text', res.data.data[0].text);
+        // console.log('res.data.data[0].text', res.data.data[0].text);
         setText_Id(res.data.data[0].id);
+        props.dispatch({type: TEXTID, payload: res.data.data[0].id});
         setCefr(res.data.data[0].cefr);
-        // props.dispatch({type: TEXT_CEFR, payload: res.data.data[0].cefr});
         setDifficulty(res.data.data[0].difficulty);
-        // props.dispatch({type: TEXT_DIFFICULTY, payload: res.data.data[0].difficulty});
         setType(res.data.data[0].type);
-        // props.dispatch({type: TEXT_TYPE, payload: res.data.data[0].type});
         let aut = await axios.get(
           'http://localhost:8000/api/texts/author/' + 
           res.data.data[0].author_id, config
@@ -53,7 +51,7 @@ const TranslateEnEs = (props) => {
       }
     }
     retrieveTexts();
-  }, [text, author, cefr, difficulty, type, enEs, props.credentials.token]);
+  }, []);
 
   return (
     <TranslateEnEsSt>
@@ -80,5 +78,6 @@ const TranslateEnEsSt = styled.div`
 
 export default connect((state) => ({
   credentials: state.credentials,
-  // textStore: state.textStore,
+  textid: state.textid,
+  hitrate: state.hitrate,
 }))(TranslateEnEs);
