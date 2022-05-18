@@ -1,12 +1,12 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GlobalStyle } from './assets/styles/globalStyles';
+import styled from 'styled-components';
 import Header from './sections/Header';
 import Footer from './sections/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
-import styled from 'styled-components';
 import EditProfile from './pages/EditProfile';
 import DeleteProfile from './pages/DeleteProfile';
 import TranslateEnEs from './features/TranslateEnEs';

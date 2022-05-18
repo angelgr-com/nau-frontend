@@ -111,6 +111,7 @@ const TranslateEnEs = (props) => {
       <HeaderSection>Test your skill level (CEFR)</HeaderSection>
       <TranslateEnEsSt>
         <TranslationCard
+          language="Spanish"
           text={text}
           text_id={text_id}
           author={author}

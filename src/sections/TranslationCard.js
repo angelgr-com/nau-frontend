@@ -10,7 +10,7 @@ const TranslationCard = (props) => {
       <TextTop
         text={props.text}
       />
-      <TranslationCardBottom />
+      <TranslationCardBottom language={props.language}/>
     </TranslationCardSt>
   )
 }

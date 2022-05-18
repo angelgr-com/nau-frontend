@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import TranslationCard from '../sections/TranslationCard';
 import TranslationCheck from '../sections/TranslationCheck';
 
-const TranslateEnEs = (props) => {
+const TranslateEsEn = (props) => {
   const [text, setText] = useState('');
   const [text_id, setText_Id] = useState('');
   const [enEs, setEnEs] = useState('');
@@ -24,6 +24,7 @@ const TranslateEnEs = (props) => {
       const config = {
         headers: { Authorization: `Bearer ${props.credentials.token}` }
       };
+      // Load texts by CEFR level
       try {
         let res = null;
         let cefr_url = {cefr};
@@ -44,7 +45,6 @@ const TranslateEnEs = (props) => {
             config
           );
         }
-        setText(res.data.data[0].text);
         setNextPageUrl(res.data.next_page_url);
         setText_Id(res.data.data[0].id);
         props.dispatch({type: TEXTID, payload: res.data.data[0].id});
@@ -60,7 +60,10 @@ const TranslateEnEs = (props) => {
           'https://quiet-shelf-00426.herokuapp.com/api/texts/en-es/' + 
           res.data.data[0].id, config
         );
-        setEnEs(tra.data.esText);
+        // Set Spanish text
+        setText(tra.data.esText);
+        // Set English text
+        setEnEs(res.data.data[0].text);
       } catch (error) {
         console.log('error: ', error.response.data.message);
       }
@@ -106,21 +109,22 @@ const TranslateEnEs = (props) => {
 
   return (
     <>
-      <TranslateEnEsSt>
+      <TranslateEsEnSt>
         <TranslationCard
+          language="English"
           text={text}
           text_id={text_id}
           author={author}
         />
         {showTranslationCheck()}
-      </TranslateEnEsSt>
+      </TranslateEsEnSt>
       <Button onClick={() => showAnswer()}>Show answer</Button>
       <Button onClick={() => nextText()}>Next</Button>
     </>
   );
 }
 
-const TranslateEnEsSt = styled.div`
+const TranslateEsEnSt = styled.div`
   display: flex;
   flex-direction: row;
 `;
@@ -134,7 +138,16 @@ const Button = styled.a`
   height: 2em;
   justify-content: center;
   margin-bottom: 1em;
-  width: auto;
+  width: 8em;
+  @media only Screen and (max-width: 60em) {
+    width: 15em;
+  }
+  @media only Screen and (max-width: 48em) {
+    width: 17em;
+  }
+  @media only Screen and (max-width: 30em) {
+    width: 12em;
+  }
 `;
 
 export default connect((state) => ({
@@ -142,4 +155,4 @@ export default connect((state) => ({
   textid: state.textid,
   hitrate: state.hitrate,
   submited: state.submited,
-}))(TranslateEnEs);
+}))(TranslateEsEn);

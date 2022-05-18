@@ -24,7 +24,7 @@ const TranslationBottom = (props) => {
     props.dispatch({type: SUBMITED, payload: isTextSubmited});
   
     let body = {
-      language: 'Spanish',
+      language: props.language,
       text: userTranslation,
       text_id: props.textid,
     }
