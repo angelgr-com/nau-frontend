@@ -7,7 +7,6 @@ import TranslationCard from '../sections/TranslationCard';
 import TranslationCheck from '../sections/TranslationCheck';
 
 const TranslateEnEs = (props) => {
-  const [loading,setLoading] = useState(true);
   const [text, setText] = useState('');
   const [text_id, setText_Id] = useState('');
   const [enEs, setEnEs] = useState('');
@@ -18,12 +17,6 @@ const TranslateEnEs = (props) => {
   const [type, setType] = useState('');
   const [author, setAuthor] = useState('');
   const [isTextSubmited, setIsTextSubmited] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    },4000);
-  },[]);
 
   useEffect(()=>{
     async function retrieveTexts() {
@@ -78,10 +71,6 @@ const TranslateEnEs = (props) => {
 
 
   const nextText = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    },5000);
     setIsTextSubmited(false);
     props.dispatch({type: SUBMITED, payload: isTextSubmited});
     let level = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
@@ -120,9 +109,6 @@ const TranslateEnEs = (props) => {
   return (
     <>
       <HeaderSection>Test your skill level (CEFR)</HeaderSection>
-      <Loading>
-        { loading ? "Loading text..." : ""}
-      </Loading>
       <TranslateEnEsSt>
         <TranslationCard
           text={text}
@@ -138,10 +124,6 @@ const TranslateEnEs = (props) => {
 }
 
 // Styled components
-const Loading = styled.h2`
-  color: orange;
-`;
-
 const HeaderSection = styled.h2`
   text-align: center;
   margin: 1.5em 0 0.5em 0;
