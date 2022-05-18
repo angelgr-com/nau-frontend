@@ -22,10 +22,6 @@ const Login = (props) => {
   const [isWrong, setIsWrong] = useState(false);
   const [reportError, setReportError] = useState('');
 
-    useEffect(() => {
-      console.log({Formik});
-    }, [])
-
   // Handlers
   const fillData = (e) => {
     setUserData({
@@ -64,6 +60,7 @@ const Login = (props) => {
 
   const userLogin = async () => {
     setIsWrong(false);
+    // If all errors detected by Formik are solved
     if(!(errorsForm.email || errorsForm.password)) {
       setIsLoading(true);
 
