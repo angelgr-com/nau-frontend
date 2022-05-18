@@ -9,12 +9,19 @@ const TranslationBottom = (props) => {
   const [userTranslation, setUserTranslation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isTextSubmited, setIsTextSubmited] = useState(false);
-
+  const [inputValue, setInputValue] = useState("");
 
   // Handlers
   const fillData = (e) => {
     setUserTranslation(e.target.value);
   };
+  const handleUserInput = (e) => {
+    setInputValue(e.target.value);
+  };
+  const resetInputField = () => {
+    setInputValue("");
+  };
+
 
   const saveTranslation = async () => {
     const config = {
@@ -54,15 +61,24 @@ const TranslationBottom = (props) => {
           title="user_translation"
           type='text'
           onInput={(e)=>{fillData(e)}}
+          value={inputValue}
+          onChange={handleUserInput}
         />
         {isLoading && <Info>Processing your request...</Info>}
       </div>
-      <Button onClick={() => saveTranslation()}>Check</Button>
+      <Group>
+        <ButtonTransp onClick={ resetInputField }>Delete</ButtonTransp>
+        <Button onClick={() => saveTranslation()}>Check</Button>
+      </Group>
     </TranslationBottomSt>
   )
 }
 
 // Styled components
+const Group = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 const Button = styled.a`
   align-items: center;
@@ -73,6 +89,19 @@ const Button = styled.a`
   height: 2em;
   justify-content: center;
   margin-bottom: 1em;
+  margin-left: 0.5em;
+  width: 5em;
+`;
+const ButtonTransp = styled.a`
+  align-items: center;
+  background-color: rgb(248, 165, 1, 0.5);
+  border-radius: 0.5em;
+  cursor: pointer;
+  display: flex;
+  height: 2em;
+  justify-content: center;
+  margin-bottom: 1em;
+  margin-left: 0.5em;
   width: 5em;
 `;
 
