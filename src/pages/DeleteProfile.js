@@ -40,7 +40,7 @@ const DeleteProfile = (props) => {
     };
 
     try {
-      let res = await axios.delete('https://quiet-shelf-00426.herokuapp.com/api/users/', config);
+      let res = await axios.post('https://quiet-shelf-00426.herokuapp.com/api/users/delete', config);
 
       setIsLoading(false);
       setIsEdited(true);
