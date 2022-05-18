@@ -13,7 +13,8 @@ const TranslationCard = (props) => {
       <TranslationCardBottom language={props.language}/>
       <Row>
         <Element><b>Hit rate:</b></Element>
-        <Element>{(Math.round(props.hitrate*100 * 100) / 100).toFixed(0)}</Element>%</Row>
+        <Element>{(Math.round(props.hitrate*100 * 100) / 100).toFixed(0)}</Element>%
+      </Row>
     </TranslationCardSt>
   )
 }
