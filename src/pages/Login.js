@@ -121,7 +121,7 @@ const LoginSt = styled.div`
   margin: 1em 2em 1em 1em;
   max-width: 76em;
   min-height: 20em;
-  min-width: 76em;
+  min-width: 48em;
   padding: 2em;
   @media only Screen and (max-width: 60em) {
     min-width: 45em;
