@@ -46,6 +46,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     min-width: 12em;
     outline: 0;
+    overflow-y: scroll;
     overflow-x: hidden;
     padding: 0;
   }
@@ -68,5 +69,28 @@ export const GlobalStyle = createGlobalStyle`
   img, svg {
     height: auto;
     width: 100%;
+  }
+  html::-webkit-scrollbar {
+    width: 0.7em;
+  }
+
+  html::-webkit-scrollbar-track {
+    background: rgb(248, 165, 1, 0.1);
+    border-radius: 0.7em;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background: rgb(248, 165, 1, 0.3);
+    border-radius: 0.7em;
+  }
+
+  html::-webkit-scrollbar-thumb:hover {
+    background: rgb(248, 165, 1, 0.4);
+    border-radius: 0.7em;
+  }
+
+  html::-webkit-scrollbar-thumb:active {
+    background: rgb(248, 165, 1, 0.5);
+    border-radius: 0.7em;
   }
 `;

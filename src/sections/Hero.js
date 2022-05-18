@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LOGOUT } from '../store/types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Button from '../components/Button';
@@ -9,7 +8,7 @@ import Paragraph from '../components/Paragraph';
 
 const Hero = (props) => {
   let navigate = useNavigate();
-
+  
   // Render without credentials
   if (!props.credentials?.token) {
     return (

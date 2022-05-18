@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import styled from 'styled-components';
 import Paragraph from '../components/Paragraph';
 
 const CompleteProfile = (props) => {
+  let navigate = useNavigate();
 
   // Hooks
   const [languagesList, setLanguagesList] = useState([]);
@@ -62,9 +64,10 @@ const CompleteProfile = (props) => {
     };
     try {
       setIsWrong(false);
-      const res = await axios.post('https://quiet-shelf-00426.herokuapp.com/api/users/profile/add-data', body, config);
+      await axios.post('https://quiet-shelf-00426.herokuapp.com/api/users/profile/add-data', body, config);
       setIsLoading(false);
       setIsProfileComplete(true);
+      setTimeout(() => navigate('/profile'), 2000);
     } catch (error) {
       setIsWrong(true);
       setIsLoading(false);
