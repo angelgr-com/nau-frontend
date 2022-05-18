@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import Button from '../components/Button';
 import HeaderSection from '../components/HeaderSection';
 import Paragraph from '../components/Paragraph';
 
@@ -16,10 +15,8 @@ const Hero = (props) => {
         <HeaderSection text='Practice your writing skills' />
         <Paragraph text='Great things are not done by impulse, but by a series of small things brought together.' />
         <Author>Vincent Van Gogh</Author>
-        <Button
-          text='Register to start practicing'
-          onClick={() => navigate('/register')}
-        >
+        <Button onClick={() => navigate('/register')}>
+          Register to start practicing
         </Button>
       </HeroSt>
     )
@@ -45,7 +42,17 @@ const Author = styled.div`
   font-weight: bold;
   margin-bottom: 1em;
 `;
-
+const Button = styled.a`
+  align-items: center;
+  background-color: orange;
+  border-radius: 0.5em;
+  cursor: pointer;
+  display: flex;
+  height: 2em;
+  justify-content: center;
+  margin-bottom: 1em;
+  width: auto;
+`;
 const HeroSt = styled.div`
   box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
   display: flex;
