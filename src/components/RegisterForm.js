@@ -3,8 +3,8 @@ import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { LOGIN } from '../store/types';
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import styled from 'styled-components';
 
 const RegisterForm = (props) => {
@@ -23,11 +23,12 @@ const RegisterForm = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [isWrong, setIsWrong] = useState(false);
-  const [passwordError, setPasswordError] = useState('');
+  const [reportError, setReportError] = useState('');
   
+  // Check dinamically if password confirmation matchs
   useEffect(()=>{
     if (userData.password !== userData.password_confirmation) {
-      setPasswordError('The password confirmation does not match');
+      setReportError('The password confirmation does not match');
       setIsWrong(true);
       return;
     } else {
@@ -36,6 +37,7 @@ const RegisterForm = (props) => {
   }, [userData]);
   useEffect(()=>{});
 
+  // Form initial values to validate data
   const initialValues = {
     first_name: '',
     last_name: '',
@@ -45,6 +47,7 @@ const RegisterForm = (props) => {
     password_confirmation: '',
   };
 
+  // Form data validation with Yup
   const validationSchema = Yup.object({
     first_name: Yup.string()
                    .required('Required')
@@ -76,14 +79,6 @@ const RegisterForm = (props) => {
                 .max(32),
   });
 
-  // const formik = useFormik({
-  //   initialValues: initialValues,
-  //   validationSchema: validationSchema,
-  //   onSubmit: values => {
-  //    alert(JSON.stringify(values, null, 2));
-  //   },
-  // });
-
   // Handlers
   const fillData = (e) => {
     setUserData({
@@ -103,7 +98,7 @@ const RegisterForm = (props) => {
     }
 
     try {
-      // setIsWrong(false);
+      setIsWrong(false);
       const res = await axios.post('https://quiet-shelf-00426.herokuapp.com/api/users', body);
       setIsLoading(false);
       setIsRegistered(true);
@@ -113,8 +108,8 @@ const RegisterForm = (props) => {
       }, 2000);
     } catch (error) {
       setIsLoading(false);
-      // setErrorMessage(error.response.data.message);
-      // setIsWrong(true);
+      setReportError(error.response.data.message);
+      setIsWrong(true);
     }
   }
 
@@ -204,7 +199,7 @@ const RegisterForm = (props) => {
               type="password"
             />
           </Group>
-          {isWrong && <Error>{passwordError}</Error>}
+          {isWrong && <Error>{reportError}</Error>}
           {isLoading && <Info>Processing your request...</Info>}
           {isRegistered && <Info>You are now successfully registered. Please, login.</Info>}
           <Button type="submit" onClick={() => userRegistration()}>Sign Up</Button>

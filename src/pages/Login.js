@@ -3,6 +3,8 @@ import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { LOGIN } from '../store/types';
+import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
+import * as Yup from 'yup';
 import styled from 'styled-components';
 import BubbleSpeech from '../components/BubbleSpeech';
 
@@ -18,10 +20,11 @@ const Login = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
   const [isWrong, setIsWrong] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [reportError, setReportError] = useState('');
 
-  useEffect(()=>{}, []);
-  useEffect(()=>{});
+    useEffect(() => {
+      console.log({Formik});
+    }, [])
 
   // Handlers
   const fillData = (e) => {
@@ -30,25 +33,65 @@ const Login = (props) => {
       [e.target.name]: e.target.value})
   };
 
-  const userLogin = async () => {
-    setIsLoading(true);
-    let body = {
-      email: userData.email,
-      password: userData.password,
-    }
+  // Form initial values to validate data
+  const initialValues = {
+    email: '',
+    password: '',
+  };
 
-    try {
-      let result = await axios.post('https://quiet-shelf-00426.herokuapp.com/api/users/login', body);
-      setIsLoading(false);
-      setIsLogged(true);
-      props.dispatch({type:LOGIN, payload: result.data});
-      setTimeout(()=>{
-        navigate('/profile');
-      }, 2000);
-    } catch (error) {
-      setIsLoading(false);
-      setErrorMessage(error.response.data.message);
-      setIsWrong(true);
+  // Form data validation with Yup
+  const validationSchema = Yup.object({
+    email: Yup.string()
+              .email()
+              .matches(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i)
+              .min(8)
+              .max(66)
+              .required('required'),
+    password: Yup.string()
+                 .required('required')
+                 .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*+-]).{8,32}$/, "minimum eight characters with at least one upper case, one lower case, one number and one special character (#?!@$%^&*+-)")
+                 .min(8)
+                 .max(32),
+  });
+
+  // Check if Formik has detected errors
+  let errorsForm = {};
+  const FormValidation = () => {
+    // Grab values and submitForm from useFormikContext
+    const { errors } = useFormikContext();
+    errorsForm = errors;
+  };
+
+  const userLogin = async () => {
+    setIsWrong(false);
+    if(!(errorsForm.email || errorsForm.password)) {
+      setIsLoading(true);
+
+      let body = {
+        email: userData.email,
+        password: userData.password,
+      }
+
+      try {
+        if(body){
+          let result = await axios.post('https://quiet-shelf-00426.herokuapp.com/api/users/login', body);
+          setIsWrong(false);
+          setIsLoading(false);
+          setIsLogged(true);
+          props.dispatch({type:LOGIN, payload: result.data});
+          setTimeout(()=>{
+            navigate('/profile');
+          }, 2000);
+        } else {
+          setIsLoading(false);
+          setReportError('Please, solve errors before submit');
+          setIsWrong(true);
+        }
+      } catch (error) {
+        setIsLoading(false);
+        setReportError(error.response.data.message);
+        setIsWrong(true);
+      }
     }
   }
 
@@ -57,43 +100,75 @@ const Login = (props) => {
       <BubbleSpeech text='Hi! Welcome back' />
       <h1>Login to access your profile</h1>
       <p>Don't have an account? <a href='/register'>Sign Up</a></p>
-      <form id="login" method="post" autoComplete="on">
-        <div>
-          <label>Email: </label>
-          <InputSt
-            autoComplete="email"
-            id="email"
-            name="email"
-            placeholder="Email"
-            title="email"
-            type="email"
-            onInput={(e)=>{fillData(e)}}
-          />
-        </div>
-        <div>
-          <label>Password: </label>
-          <InputSt
-            autoComplete="new_password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            title="password"
-            type="password"
-            onInput={(e)=>{fillData(e)}}
-          />
-        </div>
-        <p><a href='/login'>Forgot password?</a></p>
-        {isLoading && <Info>Processing your request...</Info>}
-        {isLogged && <Info>Login successful.</Info>}
-        {isWrong && <Error>{errorMessage} {isWrong}</Error>}
-        <Button onClick={() => userLogin()}>Sign In</Button>
-      </form>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            // console.log(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+          }, 400);
+        }}
+      >
+        <Form id="login" method="post" autoComplete="on">
+          <Group>
+            <LabelGroup>
+              <label>Email: </label>
+              <ErrorMessage name="email" render={msg => <div style={errorM}>{msg}</div>} />
+            </LabelGroup>
+            <Field
+              as={InputSt}
+              autoComplete="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+              title="email"
+              type="email"
+              onInput={(e)=>{fillData(e)}}
+            />
+          </Group>
+          <Group>
+            <LabelGroup>
+              <label>Password: </label>
+              <ErrorMessage name="password" render={msg => <div style={errorM}>{msg}</div>} />
+            </LabelGroup>
+            <Field
+              as={InputSt}
+              autoComplete="new_password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              title="password"
+              type="password"
+              onInput={(e)=>{fillData(e)}}
+            />
+          </Group>
+          <p><a href='/login'>Forgot password?</a></p>
+          {isLoading && <Info>Processing your request...</Info>}
+          {isLogged && <Info>Login successful.</Info>}
+          {isWrong && <Error>{reportError}</Error>}
+          <FormValidation />
+          <Button type="submit" onClick={() => userLogin()}>Sign In</Button>
+        </Form>
+      </Formik>
     </LoginSt>
   )
 }
 
 // Styled components
-
+const Group = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const LabelGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+const errorM = {
+  color: 'orange',
+  marginLeft: '0.5em',
+  maxWidth: '20em'
+};
 const Error = styled.div`
   color: red;
 `;
