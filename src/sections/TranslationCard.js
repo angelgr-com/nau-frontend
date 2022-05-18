@@ -11,9 +11,22 @@ const TranslationCard = (props) => {
         text={props.text}
       />
       <TranslationCardBottom language={props.language}/>
+      <Row>
+        <Element><b>Hit rate:</b></Element>
+        <Element>{(Math.round(props.hitrate*100 * 100) / 100).toFixed(0)}</Element>%</Row>
     </TranslationCardSt>
   )
 }
+
+// Styled componets
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 0.5em;
+`;
+const Element = styled.div`
+  margin-left: 0.5em;
+`;
 
 const TranslationCardSt = styled.div`
   align-items: center;
@@ -42,4 +55,7 @@ const TranslationCardSt = styled.div`
 
 export default connect((state) => ({
   credentials: state.credentials,
+  textid: state.textid,
+  hitrate: state.hitrate,
+  submited: state.submited,
 }))(TranslationCard);

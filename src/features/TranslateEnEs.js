@@ -115,7 +115,8 @@ const TranslateEnEs = (props) => {
           text={text}
           text_id={text_id}
           author={author}
-        />
+        >
+        </TranslationCard>
         {showTranslationCheck()}
       </TranslateEnEsSt>
       <Button onClick={() => showAnswer()}>Show/hide answer</Button>

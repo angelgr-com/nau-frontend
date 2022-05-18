@@ -7,7 +7,7 @@ const TranslationCheckBottom = (props) => {
     <TranslationBottomSt>
     <div>
       <ul>
-        <li><b>Hit rate: </b>{props.hitrate*100} %</li>
+        <li><b>Hit rate: </b>{(Math.round(props.hitrate*100 * 100) / 100).toFixed(0)} %</li>
         <li><b>CEFR: </b>{props.cefr}</li>
         <li><b>Difficulty: </b>{props.difficulty}</li>
         <li><b>Type: </b>{props.type}</li>
