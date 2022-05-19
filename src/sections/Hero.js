@@ -34,7 +34,6 @@ const Hero = (props) => {
       </HeroSt>
     )
   }
-
 }
 
 const Author = styled.div`
@@ -51,9 +50,16 @@ const Button = styled.a`
   justify-content: center;
   margin-bottom: 1em;
   text-align: center;
-  width: 9em;
+  width: 15em;
+  @media only Screen and (max-width: 48em) {
+    width: 9em;
+  }
+  @media only Screen and (max-width: 30em) {
+    width: 9em;
+  }
 `;
 const HeroSt = styled.div`
+  align-items: center;
   box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: row;

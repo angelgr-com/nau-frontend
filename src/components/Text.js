@@ -9,6 +9,7 @@ const Text = (props) => {
 
 const TextSt = styled.div`
   background-color: var(--bl3);
+  border-radius: 0.5em;
   border: 0.1em dotted var(--gd2);
   font-style: italic;
   padding: 0.4em;
