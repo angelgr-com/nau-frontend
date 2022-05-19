@@ -43,10 +43,10 @@ const DeleteProfile = (props) => {
 
       setIsLoading(false);
       setIsEdited(true);
-      logOut();
       setTimeout(()=>{
+        logOut();
         navigate('/');
-      }, 4000);
+      }, 5000);
     } catch (error) {
       setIsLoading(false);
       setErrorMessage(error.response.data.message);
