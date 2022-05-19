@@ -43,7 +43,7 @@ const Feature = (props) => {
             <Button>Check</Button>
           </Group>
           <Row>
-            %<Element>{(Math.round(props.hitrate*100 * 100) / 100).toFixed(0)}</Element>
+            %<Element>{(Math.round(0.9*100 * 100) / 100).toFixed(0)}</Element>
             <Element><b>Hit rate:</b></Element>
           </Row>
         </TranslationBottomSt>
