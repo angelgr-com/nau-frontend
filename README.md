@@ -13,7 +13,7 @@ The objective is to create an app for language learning by translating and proof
 - The app is deployed using AWS Amplify:
   - https://main.d5ung8q2igeq.amplifyapp.com/
 
-- A quick preview showing web and mobile version:
+- A quick preview showing web and mobile versions:
 
 ![](src/assets/img/naulan.gif)
 
@@ -31,7 +31,7 @@ The objective is to create an app for language learning by translating and proof
 
 ## Application requirements
 
-- 🆗 Users must be able to know the application characteristics by visiting the homepage.
+- 🆗 Users must be able to know the application characteristics when visiting the homepage.
 - ✅ Users must be able to authenticate themselves to the application by logging in.
 - 🆕 Users have to be able to translate texts from English to Spanish or vice versa and receive their hit rate.
 - 👩‍💻 Users must be able find details about the text they are translating, by finding its CEFR level, difficulty and type.
@@ -54,15 +54,15 @@ The objective is to create an app for language learning by translating and proof
 
 ## Features 📋
 
-Some hightlights about the features coded:
+Some hightlights about the coded features:
 
 ### Homepage
 
 https://github.com/angelgr-com/nau-frontend/blob/main/src/pages/Home.js
 
-- It is a **landing page** to showcase app features and encourage users to register.
+- It is a **landing page** to showcase app features and encourage users to register themselves.
 
-- **Mobile design** is considered from the beginning, so the app adapts the features card direction into columns when the screen is narrower.
+- **Mobile design** has been considered from the beginning, so the app adapts the features card direction into columns when the screen is narrower.
 
 - Feature texts are loaded using **props**:
 
@@ -107,7 +107,7 @@ https://github.com/angelgr-com/nau-frontend/blob/main/src/pages/Home.js
 
 -  In desktop view, **homepage features show a zig-zag design** (one feature description to the right and the next to the left).
 
-  - It is achieved changing the flex-direction property (css is in the same component thanks to the use of **styled-components**)
+  - It is achieved by changing the flex-direction property (css is in the same component thanks to the use of **styled-components**)
 
     ```css
     const Features = styled.div`
@@ -136,7 +136,7 @@ https://github.com/angelgr-com/nau-frontend/blob/main/src/pages/Home.js
 
 https://github.com/angelgr-com/nau-frontend/blob/main/src/sections/Header.js
 
-- Header is connected to **Redux **to update the user logged in and uses **conditional rendering**.
+- Header is connected to **Redux** to update the user logged in and uses **conditional rendering**.
 
   ```jsx
   // Render without credentials
@@ -184,7 +184,7 @@ https://github.com/angelgr-com/nau-frontend/blob/main/src/pages/Login.js
 
 https://github.com/angelgr-com/nau-frontend/blob/main/src/pages/Register.js
 
-- Login and register forms use **Formik **and **Yup** **to validate** user data.
+- Login and register forms use **Formik**and **Yup** **to validate** user data.
 
   ```jsx
     return (
@@ -230,7 +230,7 @@ https://github.com/angelgr-com/nau-frontend/blob/main/src/pages/Register.js
                      .max(50),
   ```
 
-- Password confirmation is checked dinamically using a **useEffect** to monitor the state os userData:
+- Password confirmation is checked dinamically using a **useEffect** to monitor the userData state:
 
   ```jsx
   useEffect(()=>{
@@ -275,7 +275,7 @@ https://github.com/angelgr-com/nau-frontend/blob/main/src/pages/Profile.js
 
 ### Translate En-Es
 
-- The translate page, uses two main components to display the user interface (**TranslationCard **and **TranslationCheck**).
+- The translation page uses two main components to display the user interface (**TranslationCard** and **TranslationCheck**).
 
   ![](src/assets/img/react_translation.png)
 
@@ -292,7 +292,7 @@ https://github.com/angelgr-com/nau-frontend/blob/main/src/pages/Profile.js
 
     - [TranslationCardBottom](https://github.com/angelgr-com/nau-frontend/blob/main/src/components/TranslationCardBottom.js)
 
-      - After saving user translation in database, hit rate is saved in **Redux** to access its value from **TranslationCheckBottom**.
+      - After saving user translation in database, the hit rate is saved in **Redux** to access its value from **TranslationCheckBottom**.
 
       ```jsx
       const saveTranslation = async () => {
@@ -334,7 +334,7 @@ https://github.com/angelgr-com/nau-frontend/blob/main/src/pages/Profile.js
 
     - [TranslationCheckBottom](https://github.com/angelgr-com/nau-frontend/blob/main/src/components/TranslationCheckBottom.js)
 
-      - TranslationCheckBottom is connected to redux to be able to load the hit rate:
+      - TranslationCheckBottom is connected to Redux to be able to load the hit rate:
 
         ```jsx
         export default connect((state) => ({
@@ -348,7 +348,7 @@ https://github.com/angelgr-com/nau-frontend/blob/main/src/pages/Profile.js
 
 ## Making-of 🎬
 
-- A user flow was created with [Draw.io](draw.io). It was helpful to plan the application before starting coding:
+- A user flow was created with [Draw.io](draw.io). Planning the application before starting coding was useful:
 
 ![](src/assets/img/user-flow.png)
 
