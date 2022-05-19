@@ -13,10 +13,6 @@ const Home = () => {
       header: 'Get immediate results and check your hit rate!',
       paragraph: 'If you register, you will be able to review your translations and their corrections to keep improving.',
     },
-    // {
-    //   header: 'Request a review of your translation if you believe it is correct',
-    //   paragraph: 'A native language expert will review it and give you feedback.',
-    // },
     {
       header: 'This is just the beginning...',
       paragraph: 'We will continue to improve the service and will be happy to hear what you are missing.',
@@ -36,10 +32,6 @@ const Home = () => {
         paragraph={feature[1].paragraph}
         reverse={true}
       />
-      {/* <Feature
-        header={feature[2].header}
-        paragraph={feature[2].paragraph}
-      /> */}
       <Feature
         header={feature[2].header}
         paragraph={feature[2].paragraph}
