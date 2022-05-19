@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import styled from 'styled-components';
 import { FaUserAlt } from 'react-icons/fa';
-import { GrMenu } from 'react-icons/gr';
 
 const Header = (props) => {
   let navigate = useNavigate();

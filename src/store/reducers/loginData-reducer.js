@@ -13,7 +13,8 @@ const loginDataReducer = (state = initialState, action) => {
 
         // Deletes saved user's data
         case LOGOUT : 
-            return initialState;
+            // return initialState;
+            return {...state, token: '', user: {}};
         
         case MODIFY_CREDENTIALS :
             return {...state, user: action.payload};

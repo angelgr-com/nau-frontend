@@ -14,23 +14,7 @@ const DeleteProfile = (props) => {
   const [isWrong, setIsWrong] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const logOut = async () => {
-    const config = {
-      headers: { Authorization: `Bearer ${props.credentials.token}` }
-    };
-
-    // Update logout status in server
-    try {
-      await axios.post('https://quiet-shelf-00426.herokuapp.com/api/users/logout', {}, config);
-  
-      // Delete credentials from redux
-      props.dispatch({ type: LOGOUT });
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const deleteProfile = async () => {
+  const deleteProfile = () => {
     setIsLoading(true);
     setIsWrong(false);
 
@@ -39,21 +23,24 @@ const DeleteProfile = (props) => {
     };
 
     try {
-      let res = await axios.post('https://quiet-shelf-00426.herokuapp.com/api/users/delete', config);
+      let res = axios.post('https://quiet-shelf-00426.herokuapp.com/api/users/delete', {}, config);
+
+      // Delete credentials from redux
+      setTimeout(()=>{
+        props.dispatch({ type: LOGOUT });
+      }, 2000);
 
       setIsLoading(false);
       setIsEdited(true);
       setTimeout(()=>{
-        logOut();
         navigate('/');
-      }, 5000);
+      }, 2000);
     } catch (error) {
       setIsLoading(false);
       setErrorMessage(error.response.data.message);
       setIsWrong(true);
     }
   }
-
 
   return (
     <DeleteProfileSt>
