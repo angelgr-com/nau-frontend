@@ -7,7 +7,13 @@ const TranslationCheckBottom = (props) => {
     <TranslationBottomSt>
     <div>
       <ul>
-        <li><b>Hit rate: </b>{(Math.round(props.hitrate*100 * 100) / 100).toFixed(0)} %</li>
+        {/* Conditional rendering to avoid a Not a Number error in hit rate */}
+        {isNaN(props.hitrate) &&
+          <li><b>Hit rate: </b>0 %</li>
+        }
+        {!isNaN(props.hitrate) &&
+          <li><b>Hit rate: </b>{(Math.round(props.hitrate*100 * 100) / 100).toFixed(0)} %</li>
+        }
         <li><b>CEFR: </b>{props.cefr}</li>
         <li><b>Difficulty: </b>{props.difficulty}</li>
         <li><b>Type: </b>{props.type}</li>

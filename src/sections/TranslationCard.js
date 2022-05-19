@@ -4,6 +4,7 @@ import TextTop from '../components/TextTop';
 import TranslationCardBottom from '../components/TranslationCardBottom';
 
 const TranslationCard = (props) => {
+  
 
   return (
     <TranslationCardSt>
@@ -13,7 +14,13 @@ const TranslationCard = (props) => {
       <TranslationCardBottom language={props.language}/>
       <Row>
         <Element><b>Hit rate:</b></Element>
-        <Element>{(Math.round(props.hitrate*100 * 100) / 100).toFixed(0)}</Element>%
+        {/* Conditional rendering to avoid a Not a Number error in hit rate */}
+        {isNaN(props.hitrate) &&
+          <Element>0%</Element>
+        }
+        {!isNaN(props.hitrate) &&
+          <Element>{(Math.round(props.hitrate*100 * 100) / 100).toFixed(0)}%</Element>
+        }
       </Row>
     </TranslationCardSt>
   )
@@ -31,6 +38,7 @@ const Element = styled.div`
 
 const TranslationCardSt = styled.div`
   align-items: center;
+  background-color: white;
   border-radius: 2em;
   border: 0.15em solid var(--gl1);
   box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);

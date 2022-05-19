@@ -98,6 +98,7 @@ const Element = styled.div`
 `;
 const TranslationCardSt = styled.div`
   align-items: center;
+  background-color: white;
   border-radius: 2em;
   border: 0.15em solid var(--gl1);
   box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
@@ -160,6 +161,7 @@ const InputTranslationSt = styled.textarea`
 `;
 
 const Features = styled.div`
+  background-color: white;
   box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
   display: flex;
   flex-grow: 1;

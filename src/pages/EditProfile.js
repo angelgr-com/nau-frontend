@@ -31,17 +31,20 @@ const EditProfile = (props) => {
   const sendEditedProfile = async () => {
     setIsLoading(true);
     setIsWrong(false);
+    // If user doen't change data, form the body with redux credentials
     let body = {
-      first_name: firstNameEdited,
-      username: usernameEdited,
-      email: emailEdited,
+      first_name: firstNameEdited || props.credentials.user.first_name,
+      username: usernameEdited || props.credentials.user.username,
+      email: emailEdited || props.credentials.user.email,
     };
+    console.log('body:', body);
     const config = {
       headers: { Authorization: `Bearer ${props.credentials.token}` }
     };
-
+    
     try {
       let res = await axios.put('https://quiet-shelf-00426.herokuapp.com/api/users/profile', body, config);
+      console.log('res: ', res);
       if(res) {
         props.dispatch({type: MODIFY_CREDENTIALS, payload: body});
       }
@@ -132,29 +135,29 @@ const Button = styled.a`
 `;
 
 const EditProfileSt = styled.div`
+  background-color: white;
   box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 1em 2em 1em 1em;
   max-width: 76em;
+  min-width: 50em;
   min-height: 20em;
-  min-width: 76em;
   padding: 2em;
   @media only Screen and (max-width: 60em) {
-    min-width: 45em;
     max-width: 45em;
-    margin-bottom: 40em;
+    margin-bottom: 2em;
   }
   @media only Screen and (max-width: 48em) {
     min-width: 40em;
     max-width: 40em;
-    margin-bottom: 25em;
+    margin-bottom: 2em;
   }
   @media only Screen and (max-width: 30em) {
-    min-width: 16em;
-    max-width: 16em;
-    margin-bottom: 4em;
+    min-width: 20em;
+    max-width: 1em;
+    margin-bottom: 2em;
   }
 `;
 

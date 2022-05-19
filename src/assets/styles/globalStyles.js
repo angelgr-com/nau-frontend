@@ -41,7 +41,7 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
   body {
-    background: var(--background);
+    background-color: rgb(228, 229, 233, 0.25);
     border: 0;
     margin: 0;
     min-width: 12em;

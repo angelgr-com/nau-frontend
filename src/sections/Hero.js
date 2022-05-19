@@ -60,6 +60,7 @@ const Button = styled.a`
 `;
 const HeroSt = styled.div`
   align-items: center;
+  background-color: white;
   box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: row;
