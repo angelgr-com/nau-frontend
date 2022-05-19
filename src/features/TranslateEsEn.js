@@ -124,9 +124,19 @@ const TranslateEsEn = (props) => {
   );
 }
 
+// Styled components
 const TranslateEsEnSt = styled.div`
   display: flex;
   flex-direction: row;
+  @media only Screen and (max-width: 60em) {
+    min-width: 15em;
+  }
+  @media only Screen and (max-width: 48em) {
+    padding: 1.5rem;
+  }
+  @media only Screen and (max-width: 30em) {
+    flex-direction: column;
+  }
 `;
 
 const Button = styled.a`
