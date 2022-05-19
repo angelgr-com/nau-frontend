@@ -25,7 +25,6 @@ const DeleteProfile = (props) => {
   
       // Delete credentials from redux
       props.dispatch({ type: LOGOUT });
-      navigate("/");
     } catch (error) {
       console.log(error)
     }
