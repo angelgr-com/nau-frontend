@@ -42,10 +42,7 @@ const Feature = (props) => {
             <ButtonTransp onClick={ resetInputField }>Delete</ButtonTransp>
             <Button>Check</Button>
           </Group>
-          <Row>
-            %<Element>{(Math.round(0.9*100 * 100) / 100).toFixed(0)}</Element>
-            <Element><b>Hit rate:</b></Element>
-          </Row>
+          <p><b>Hit rate:</b> 90%</p>
         </TranslationBottomSt>
       </TranslationCardSt>
     </Features>
@@ -86,6 +83,15 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   margin-left: 0.5em;
+  @media only Screen and (max-width: 60em) {
+    flex-direction: row;
+  }
+  @media only Screen and (max-width: 48em) {
+    flex-direction: row;
+  }
+  @media only Screen and (max-width: 30em) {
+    flex-direction: row;
+  }
 `;
 const Element = styled.div`
   margin-left: 0.5em;

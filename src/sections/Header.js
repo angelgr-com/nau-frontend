@@ -101,13 +101,19 @@ const Headers = styled.header`
   top: 0;
   z-index: 1000;
   @media only Screen and (max-width: 60em) {
-    min-width: 15em;
+    padding: 1.5rem;
   }
   @media only Screen and (max-width: 48em) {
     padding: 1.5rem;
   }
   @media only Screen and (max-width: 30em) {
+    width: 24em;
+    max-width: 24em;
+  }
+  @media only Screen and (max-width: 20em) {
     padding: 0.75rem;
+    width: 24em;
+    max-width: 24em;
   }
 `;
 

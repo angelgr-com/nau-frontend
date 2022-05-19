@@ -33,6 +33,12 @@ const Footers = styled.div`
   @media only Screen and (max-width: 30em) {
     height: auto;
     text-align: center;
+    width: 24em;
+  }
+  @media only Screen and (max-width: 20em) {
+    height: auto;
+    width: 24em;
+    text-align: center;
   }
 `;
 

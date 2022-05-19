@@ -42,6 +42,13 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   min-height: calc(100vh - 9em);
+  @media only Screen and (max-width: 30em) {
+    max-width: 24em;
+    width: 24em;
+  }
+  @media only Screen and (max-width: 20em) {
+    min-width: 22em;
+  }
 `;
 
 export default App;

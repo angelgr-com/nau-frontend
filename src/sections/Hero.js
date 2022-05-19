@@ -28,9 +28,8 @@ const Hero = (props) => {
         <Paragraph text='Great things are not done by impulse, but by a series of small things brought together.' />
         <Author>Vincent Van Gogh</Author>
         <Button
-          text='Start practicing'
           onClick={() => navigate('/practice/en-es')}
-        >
+        >Start practicing
         </Button>
       </HeroSt>
     )
@@ -48,10 +47,11 @@ const Button = styled.a`
   border-radius: 0.5em;
   cursor: pointer;
   display: flex;
-  height: 2em;
+  height: 3em;
   justify-content: center;
   margin-bottom: 1em;
-  width: auto;
+  text-align: center;
+  width: 9em;
 `;
 const HeroSt = styled.div`
   box-shadow: 0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.2);
